@@ -4245,8 +4245,9 @@ public class AreaUsuario extends javax.swing.JFrame {
         jLabelStatusCliente.setText(cl.get(j).getSituacao());             
         jLabelValorTotal.setText(somaTable());
         
-        if(jLabelStatusCliente.getText().equals("AUSENTE")){
+        if(jLabelStatusCliente.getText().equals("AUSENTE") || jLabelCargoPerfil.getText().equals("Funcionário")){
             jPanelExcluirCliente.setVisible(false);
+            
         }else{
             jPanelExcluirCliente.setVisible(true);
         }
