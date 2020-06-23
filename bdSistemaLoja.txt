@@ -1,0 +1,73 @@
+create database SistemaLoja
+
+create table tb_vendedor(
+
+	nm_vendedor character varying 80,
+	nm_usuario character varying 40,
+	senha_usuario character varying 30,
+	cargo_vendedor character varying 30,
+	
+CONSTRAINT pk_tb_vendedor_nm_vendedor PRIMARY KEY(nm_vendedor)
+
+
+)
+
+create table tb_clientes(
+
+	nm_cliente character varying 80,
+	telefone_cliente character varying 15,
+	endereco_cliente character varying 100,
+	situacao_cliente character varying 30,
+	nm_vendedor character varying 80,
+	valor_limite double precision,
+	
+CONSTRAINT pk_tb_clientes_nm_cliente_telefone_cliente PRIMARY KEY(nm_cliente, telefone_cliente),
+CONSTRAINT fk_tb_clientes_tb_vendedor_nm_vendedor FOREIGN KEY(nm_vendedor)
+	REFERENCES tb_vendedor(nm_vendedor)
+	
+)
+
+create table tb_vendas(
+
+	id_vendas integer serial,
+	dt_venda character varying 10,
+	descricao_venda character varying 400,
+	valor_venda double precision,
+	situação_venda character varying 30,
+	nm_cliente character varying 80,
+	telefone_cliente character varying 15,
+	nm_vendedor character varying 80,
+	
+CONSTRAINT pk_tb_vendas_id_vendas PRIMARY KEY(id_vendas),
+CONSTRAINT fk_tb_vendas_tb_clientes_nm_cliente_telefone_cliente FOREIGN KEY(nm_cliente, telefone_cliente),
+	REFERENCES tb_clientes(nm_cliente, telefone_cliente),
+CONSTRAINT fk_tb_vendas_tb_vendedor_nm_vendedor FOREIGN KEY(nm_vendedor)
+	REFERENCES tb_vendedor(nm_vendedor)
+	
+)
+
+create table tb_pagamentos(
+
+	id_pagamentos integer serial,
+	dt_pagamentos character varying 12,
+	valor_pago double precision,
+	id_vendas integer,
+	nm_cliente character varying 80,
+	telefone_cliente character varying 15,
+	nm_vendedor character varying 80,
+	tipo_pagamento character varying 12,
+	descricao character varying 400,
+	dt_compra character varying 10,
+	valor_compra double precision,
+
+CONSTRAINT pk_tb_pagamentos_id_pagamentos PRIMARY KEY(id_pagamentos),
+CONSTRAINT fk_tb_pagamentos_tb_clientes_nm_cliente_telefone_cliente FOREIGN KEY(nm_cliente, telefone_cliente),
+	REFERENCES tb_clientes(nm_cliente, telefone_cliente),
+CONSTRAINT fk_tb_pagamentos_tb_vendedor_nm_vendedor(nm_vendedor),
+	REFERENCES tb_vendedor(nm_vendedor),
+CONSTRAINT fk_tb_pagamentos_tb_vendas_id_vendas FOREIGN KEY(id_vendas)
+	REFERENCES tb_vendas(id_vendas)
+	
+
+
+)
