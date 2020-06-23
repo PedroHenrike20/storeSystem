@@ -15,6 +15,7 @@ import java.awt.Color;
 import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -46,6 +47,7 @@ public class AreaUsuario extends javax.swing.JFrame {
         }
         
     }
+    
     
     public double setValorDouble(String valor){
         String valorA = valor.replace(".", "");
@@ -1093,6 +1095,12 @@ public class AreaUsuario extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel16.setText("Filtrar");
 
+        jTxtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTxtFiltroKeyPressed(evt);
+            }
+        });
+
         jTableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -1244,9 +1252,9 @@ public class AreaUsuario extends javax.swing.JFrame {
                 .addComponent(jPanelBtnAcaoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
             .addGroup(jPanelConsultaLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(23, 23, 23)
                 .addComponent(jLabel95, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addGroup(jPanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel34)
                     .addComponent(jLabelSaldoDisp, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1261,21 +1269,21 @@ public class AreaUsuario extends javax.swing.JFrame {
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelConsultaLayout.createSequentialGroup()
-                        .addGap(65, 65, 65)
+                        .addGap(42, 42, 42)
                         .addGroup(jPanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTxtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBtnPesquisarConsulta)))
                     .addGroup(jPanelConsultaLayout.createSequentialGroup()
-                        .addGap(56, 56, 56)
+                        .addGap(31, 31, 31)
                         .addComponent(jLabel94, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addGap(44, 44, 44)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelConsultaLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanelBtnAcaoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(153, Short.MAX_VALUE))
+                        .addContainerGap(152, Short.MAX_VALUE))
                     .addGroup(jPanelConsultaLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jBtnVoltaConsultar)
@@ -1300,6 +1308,18 @@ public class AreaUsuario extends javax.swing.JFrame {
         jSeparator3.setForeground(new java.awt.Color(51, 51, 51));
 
         jPanel4.setPreferredSize(new java.awt.Dimension(351, 256));
+
+        jTxtNomeAlterar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTxtNomeAlterarKeyPressed(evt);
+            }
+        });
+
+        jTxtEnderecoAlterarClientes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTxtEnderecoAlterarClientesKeyPressed(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel18.setText("Nome");
@@ -1357,6 +1377,12 @@ public class AreaUsuario extends javax.swing.JFrame {
         jLabel40.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel40.setText("Limite");
 
+        jFormattedAlterarDados.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jFormattedAlterarDadosKeyPressed(evt);
+            }
+        });
+
         jLabel43.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel43.setText("R$");
@@ -1366,6 +1392,11 @@ public class AreaUsuario extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFormattedTxtTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jFormattedTxtTelefoneKeyPressed(evt);
+            }
+        });
 
         jLabel89.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-usuário-homem-com-círculo-50.png"))); // NOI18N
 
@@ -1385,7 +1416,7 @@ public class AreaUsuario extends javax.swing.JFrame {
                     .addComponent(jPanelMostrarSituação, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel89, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel89, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                             .addComponent(jLabel90, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel91, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel92, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1404,7 +1435,7 @@ public class AreaUsuario extends javax.swing.JFrame {
                                     .addComponent(jTxtNomeAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                                     .addComponent(jTxtEnderecoAlterarClientes)))
                             .addComponent(jFormattedTxtTelefone))))
-                .addGap(138, 138, 138))
+                .addGap(130, 130, 130))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1655,6 +1686,11 @@ public class AreaUsuario extends javax.swing.JFrame {
         jLabel26.setText("Senha");
 
         jPassFunCad.setPreferredSize(new java.awt.Dimension(111, 30));
+        jPassFunCad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPassFunCadKeyPressed(evt);
+            }
+        });
 
         jBtnCadastroGerencia.setText("Cadastrar");
         jBtnCadastroGerencia.addActionListener(new java.awt.event.ActionListener() {
@@ -2742,6 +2778,11 @@ public class AreaUsuario extends javax.swing.JFrame {
         jLabel68.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel68.setText("Descrição");
 
+        jTextPanelDescriçaoCompra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextPanelDescriçaoCompraKeyPressed(evt);
+            }
+        });
         jScrollPane4.setViewportView(jTextPanelDescriçaoCompra);
 
         jLabel67.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -2903,6 +2944,24 @@ public class AreaUsuario extends javax.swing.JFrame {
 
         jLabel76.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel76.setText("Senha");
+
+        jTxtNomeFunEditar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTxtNomeFunEditarKeyPressed(evt);
+            }
+        });
+
+        jTxtNmUsuarioEditar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTxtNmUsuarioEditarKeyPressed(evt);
+            }
+        });
+
+        jPassSenhaFuncEditar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPassSenhaFuncEditarKeyPressed(evt);
+            }
+        });
 
         jCheckMostrarSenha.setBackground(new java.awt.Color(204, 204, 204));
         jCheckMostrarSenha.setText("Mostrar senha");
@@ -3720,6 +3779,8 @@ public class AreaUsuario extends javax.swing.JFrame {
         jLabel104.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel104.setText("Filtrar por:");
 
+        jPanelCampoNome.setBackground(new java.awt.Color(204, 204, 204));
+
         jTextNomePesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextNomePesquisaKeyPressed(evt);
@@ -3738,6 +3799,8 @@ public class AreaUsuario extends javax.swing.JFrame {
             jPanelCampoNomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTextNomePesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
+
+        jPanelCampoData.setBackground(new java.awt.Color(204, 204, 204));
 
         try {
             jFormattedTxtDt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##   /    ##    /   ####")));
@@ -3762,6 +3825,8 @@ public class AreaUsuario extends javax.swing.JFrame {
             jPanelCampoDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jFormattedTxtDt, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
         );
+
+        jPanelBtnPesquisar.setBackground(new java.awt.Color(204, 204, 204));
 
         jBtnPesquisar.setText("Pesquisar");
         jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -3823,6 +3888,9 @@ public class AreaUsuario extends javax.swing.JFrame {
                 .addGap(0, 7, Short.MAX_VALUE))
         );
 
+        jPanelDtPg.setBackground(new java.awt.Color(204, 204, 204));
+
+        jRadioBtnDtPg.setBackground(new java.awt.Color(204, 204, 204));
         buttonGroup3.add(jRadioBtnDtPg);
         jRadioBtnDtPg.setText("Data Pagamento");
         jRadioBtnDtPg.addActionListener(new java.awt.event.ActionListener() {
@@ -4079,11 +4147,7 @@ public class AreaUsuario extends javax.swing.JFrame {
             String nm_cliente = jTxtNomeCadCliente.getText();
             String telefone_cliente = jFormattTelCadCliente.getText();
             String endereco_cliente = jTxtEnderecoCadCliente.getText();
-            
-            //String numero = jFormattedValorCadCliente.getText();
-            //String numeroA = numero.replace(".", "");
-            //String numeroB = numeroA.replace(",", ".");
-            //double limite_cliente = Double.parseDouble(numeroB);
+     
             double limiteCliente = setValorDouble(jFormattedValorCadCliente.getText());
             Senha s = new Senha();
             s.setLabel(acao, nome, usuario);
@@ -4471,12 +4535,14 @@ public class AreaUsuario extends javax.swing.JFrame {
             jFormattedTxtTelefone.setEditable(true);
             jTxtEnderecoAlterarClientes.setEditable(true);
             jFormattedAlterarDados.setEditable(true);
+            jPanelBtnSalvar.setVisible(true);
         }else{
             jPanelMostrarSituação.setVisible(true);
             jTxtNomeAlterar.setEditable(false);
             jFormattedTxtTelefone.setEditable(false);
             jTxtEnderecoAlterarClientes.setEditable(false);
             jFormattedAlterarDados.setEditable(false);
+            jPanelBtnSalvar.setVisible(false);
         }
         
         
@@ -4948,9 +5014,8 @@ public class AreaUsuario extends javax.swing.JFrame {
                 compras = vnDAO.pesquisaCompras(2, jTextNomePesquisa.getText());
                               
             }else{
-                String dtCompra = jFormattedTxtDt.getText();
-                String data = dtCompra.replace(" ", "");
-                compras = vnDAO.pesquisaCompras(3, data);
+                String dtCompra = setDt(jFormattedTxtDt.getText());
+                compras = vnDAO.pesquisaCompras(3, dtCompra);
             }
             DefaultTableModel valor = (DefaultTableModel) jTableRelatorioVendas.getModel();
             valor.getDataVector().removeAllElements();
@@ -4978,9 +5043,8 @@ public class AreaUsuario extends javax.swing.JFrame {
                 compras = vnDAO.pesquisaCompras(2, jTextNomePesquisa.getText());
                               
             }else{
-                String dtCompra = jFormattedTxtDt.getText();
-                String data = dtCompra.replace(" ", "");
-                compras = vnDAO.pesquisaCompras(3, data);
+                String dtCompra = setDt(jFormattedTxtDt.getText());
+                compras = vnDAO.pesquisaCompras(3, dtCompra);
             }
             DefaultTableModel valor = (DefaultTableModel) jTableRelatorioVendas.getModel();
             valor.getDataVector().removeAllElements();
@@ -5148,6 +5212,226 @@ public class AreaUsuario extends javax.swing.JFrame {
                 }
         }
     }//GEN-LAST:event_jFormattedTxtValorAReceberKeyPressed
+
+    private void jTxtFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFiltroKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            ClienteDAO clDAO = new ClienteDAO();
+            List<Clientes> clientes = null;
+            clientes = clDAO.pesquisaCliente(jTxtFiltro.getText());
+        
+            DefaultTableModel valor = (DefaultTableModel) jTableClientes.getModel();
+            valor.getDataVector().removeAllElements();
+        
+            int i = 0;
+        
+            while(clientes.size()>i){
+                valor.addRow(new Object[]{clientes.get(i).getNome(), clientes.get(i).getTelefone(), clientes.get(i).getEndereco(), clientes.get(i).getSituacao(), clientes.get(i).getNm_vendedor()});
+                i++;
+            }
+        }
+        
+    }//GEN-LAST:event_jTxtFiltroKeyPressed
+
+    private void jFormattedAlterarDadosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedAlterarDadosKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            String açao = "finalizar a alteração do cliente.";
+            String vendedor = jLabelNomePerfil.getText();
+            String nm_user = jLabelUsuarioPerfil.getText();
+            String nome = jTxtNomeAlterar.getText();
+            String telefone = jFormattedTxtTelefone.getText();
+            String endereco = jTxtEnderecoAlterarClientes.getText();
+        
+            double limite = setValorDouble(jFormattedAlterarDados.getText());  // ALTERAÇÃO FULL
+        
+            Senha s = new Senha();
+            s.setLabel(açao, vendedor, nm_user);
+            s.getDadosClientes(nome, endereco, telefone, limite);
+            s.show();
+            s.setLocationRelativeTo(null);
+        }
+        
+    }//GEN-LAST:event_jFormattedAlterarDadosKeyPressed
+
+    private void jTxtEnderecoAlterarClientesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtEnderecoAlterarClientesKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            String açao = "finalizar a alteração do cliente.";
+            String vendedor = jLabelNomePerfil.getText();
+            String nm_user = jLabelUsuarioPerfil.getText();
+            String nome = jTxtNomeAlterar.getText();
+            String telefone = jFormattedTxtTelefone.getText();
+            String endereco = jTxtEnderecoAlterarClientes.getText();
+        
+            double limite = setValorDouble(jFormattedAlterarDados.getText());  // ALTERAÇÃO FULL
+        
+            Senha s = new Senha();
+            s.setLabel(açao, vendedor, nm_user);
+            s.getDadosClientes(nome, endereco, telefone, limite);
+            s.show();
+            s.setLocationRelativeTo(null);
+        }
+    }//GEN-LAST:event_jTxtEnderecoAlterarClientesKeyPressed
+
+    private void jFormattedTxtTelefoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTxtTelefoneKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            String açao = "finalizar a alteração do cliente.";
+            String vendedor = jLabelNomePerfil.getText();
+            String nm_user = jLabelUsuarioPerfil.getText();
+            String nome = jTxtNomeAlterar.getText();
+            String telefone = jFormattedTxtTelefone.getText();
+            String endereco = jTxtEnderecoAlterarClientes.getText();
+        
+            double limite = setValorDouble(jFormattedAlterarDados.getText());  // ALTERAÇÃO FULL
+        
+            Senha s = new Senha();
+            s.setLabel(açao, vendedor, nm_user);
+            s.getDadosClientes(nome, endereco, telefone, limite);
+            s.show();
+            s.setLocationRelativeTo(null);
+        }
+    }//GEN-LAST:event_jFormattedTxtTelefoneKeyPressed
+
+    private void jTxtNomeAlterarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNomeAlterarKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            String açao = "finalizar a alteração do cliente.";
+            String vendedor = jLabelNomePerfil.getText();
+            String nm_user = jLabelUsuarioPerfil.getText();
+            String nome = jTxtNomeAlterar.getText();
+            String telefone = jFormattedTxtTelefone.getText();
+            String endereco = jTxtEnderecoAlterarClientes.getText();
+        
+            double limite = setValorDouble(jFormattedAlterarDados.getText());  // ALTERAÇÃO FULL
+        
+            Senha s = new Senha();
+            s.setLabel(açao, vendedor, nm_user);
+            s.getDadosClientes(nome, endereco, telefone, limite);
+            s.show();
+            s.setLocationRelativeTo(null);
+        }
+    }//GEN-LAST:event_jTxtNomeAlterarKeyPressed
+
+    private void jPassFunCadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPassFunCadKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            if(jTxtNomeFuncCad.getText().equals("") || jTxtUserFunCad.getText().equals("") || jPassFunCad.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos antes de prosseguir!", "Alerta!",1);
+            }else{
+                String nm_vendedor = jTxtNomeFuncCad.getText();
+                String nm_usuario = jTxtUserFunCad.getText();
+                String senha = String.valueOf(jPassFunCad.getPassword());
+                String nome = jLabelNomeUsuario.getText();
+                String usuario = jLabelUsuarioPerfil.getText();
+                String acao = "finalizar o cadastro de um novo vendedor.";
+                Senha s = new Senha();
+                s.setLabel(acao, nome, usuario);
+                s.getDadosVendedor(nm_vendedor, nm_usuario, senha);
+                s.show();
+                s.setLocationRelativeTo(null);
+            }
+        }
+    }//GEN-LAST:event_jPassFunCadKeyPressed
+
+    private void jTextPanelDescriçaoCompraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPanelDescriçaoCompraKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            if(jFormattedTxtDataCompra.getText().equals("") || jFormattedTxtValorCompra.getText().equals(null) || jTextPanelDescriçaoCompra.getText().equals("")){
+            
+                JOptionPane.showMessageDialog(this, "Preencha os campos acima antes de prosseguir!","Alerta!",1);
+            
+            }else{
+                double valorCompra = setValorDouble(jFormattedTxtValorCompra.getText());  // ALTERAÇÃO FULL
+                double valor_limite = Double.parseDouble(jLabelLimiteDisponivelDetalhesClientes.getText());
+                double nvLimite = valor_limite - valorCompra;
+            
+                String nv_limite = arredondaValores(nvLimite);  // ALTERAÇÃO FULL
+                double limiteAtual = setValorDouble(nv_limite);
+         
+            
+            
+                if(valorCompra <= valor_limite){
+                    Senha s = new Senha();
+                    String acao = "finalizar a compra do cliente";
+                    String nome_user = jLabelNomeUsuario.getText();
+                    String usuario = jLabelUsuarioPerfil.getText();
+                    s.setLabel(acao, nome_user, usuario);
+                    String dt_compra = setDt(jFormattedTxtDataCompra.getText());  // ALTERAÇÃO FULL
+                    String descrição = jTextPanelDescriçaoCompra.getText();
+                    String nome_cliente = jLabelNomeDetalhes.getText();
+                    String telefone_cliente = jLabelTelefoneDetalhesCliente.getText();  
+                    jLabelLimiteDisponivelDetalhesClientes.setText(String.valueOf(limiteAtual));
+                    s.getDadosCompra(nome_cliente, telefone_cliente, dt_compra, valorCompra, descrição, nome_user, limiteAtual);
+                    s.show();
+                    s.setLocationRelativeTo(null);
+                }else{
+                    JOptionPane.showMessageDialog(this, "Saldo Insuficiente Para Efetuar Essa Compra!","Alerta!",1);
+                }
+            }
+        }
+    }//GEN-LAST:event_jTextPanelDescriçaoCompraKeyPressed
+
+    private void jPassSenhaFuncEditarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPassSenhaFuncEditarKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            String açao = "finalizar a alteração de um funcionário.";
+            String nm_user = jLabelUsuarioPerfil.getText();
+            String nome = jLabelNomePerfil.getText();
+        
+            String nm_fun = jTxtNomeFunEditar.getText();
+            String nm_userFun = jTxtNmUsuarioEditar.getText();
+            char[] pass = jPassSenhaFuncEditar.getPassword();
+            String senha = String.valueOf(pass);
+        
+            Senha s = new Senha();
+            s.setLabel(açao, nome, nm_user);
+            s.getDadosVendedor(nm_fun, nm_userFun, senha);
+            s.setLocationRelativeTo(null);
+            s.show();
+        }
+    }//GEN-LAST:event_jPassSenhaFuncEditarKeyPressed
+
+    private void jTxtNmUsuarioEditarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNmUsuarioEditarKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            String açao = "finalizar a alteração de um funcionário.";
+            String nm_user = jLabelUsuarioPerfil.getText();
+            String nome = jLabelNomePerfil.getText();
+        
+            String nm_fun = jTxtNomeFunEditar.getText();
+            String nm_userFun = jTxtNmUsuarioEditar.getText();
+            char[] pass = jPassSenhaFuncEditar.getPassword();
+            String senha = String.valueOf(pass);
+        
+            Senha s = new Senha();
+            s.setLabel(açao, nome, nm_user);
+            s.getDadosVendedor(nm_fun, nm_userFun, senha);
+            s.setLocationRelativeTo(null);
+            s.show();
+        }
+    }//GEN-LAST:event_jTxtNmUsuarioEditarKeyPressed
+
+    private void jTxtNomeFunEditarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNomeFunEditarKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            String açao = "finalizar a alteração de um funcionário.";
+            String nm_user = jLabelUsuarioPerfil.getText();
+            String nome = jLabelNomePerfil.getText();
+        
+            String nm_fun = jTxtNomeFunEditar.getText();
+            String nm_userFun = jTxtNmUsuarioEditar.getText();
+            char[] pass = jPassSenhaFuncEditar.getPassword();
+            String senha = String.valueOf(pass);
+        
+            Senha s = new Senha();
+            s.setLabel(açao, nome, nm_user);
+            s.getDadosVendedor(nm_fun, nm_userFun, senha);
+            s.setLocationRelativeTo(null);
+            s.show();
+        }
+    }//GEN-LAST:event_jTxtNomeFunEditarKeyPressed
 
     /**
      * @param args the command line arguments
