@@ -24,8 +24,8 @@ public class UsuarioDAO {
     //SALVANDO USUARIOS
     public void salvarUsuarios(Vendedor vendedor){
     
-        String sql = "INSERT INTO tb_vendedor(nm_vendedor, nm_usuario, senha_usuario, cargo_vendedor)"
-            + "VALUES(?,?,?,'Funcionário')";
+        String sql = "INSERT INTO tb_vendedor(nm_vendedor, nm_usuario, senha_usuario, cargo_vendedor, situaçao_vendedor)"
+            + "VALUES(?,?,?,'Funcionário', 'Ativo')";
     
         try{
             PreparedStatement stmt = conecta.prepareStatement(sql);
@@ -91,9 +91,9 @@ public class UsuarioDAO {
         
     }
     
-    public void excluirUsuario(Vendedor vendedor){
+    public void tornarInativo(Vendedor vendedor){
         
-        String sql = "DELETE FROM tb_vendedor WHERE nm_vendedor=? ";
+        String sql = "UPDATE tb_vendedor SET situaçao_vendedor = 'Inativo' WHERE nm_vendedor=? ";
         
         try{
             PreparedStatement stmt = conecta.prepareStatement(sql);
@@ -109,8 +109,24 @@ public class UsuarioDAO {
         }
             
     }
+    public void tornarAtivo(Vendedor vendedor){
+        
+        String sql = "UPDATE tb_vendedor SET situaçao_vendedor = 'Ativo' WHERE nm_vendedor=?";
+        try{
+            PreparedStatement stmt = conecta.prepareStatement(sql);
+            
+            stmt.setString(1, vendedor.getNome());
+            
+            stmt.execute();
+            stmt.close();
+        }catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    
     public boolean validarLogin(String usuario, String senha){
     boolean autenticacao = false;
+    String situaçao = "";
        
        String sql = "SELECT * FROM tb_vendedor WHERE nm_usuario =? AND senha_usuario =? ";
        
@@ -126,9 +142,15 @@ public class UsuarioDAO {
            if(rs.next()){
                usuario = rs.getString("nm_usuario");
                senha = rs.getString("senha_usuario");
-               autenticacao = true;
+               situaçao = rs.getString("situaçao_vendedor");
+               //autenticacao = true;
            }else{
                stmt.close();
+               return autenticacao;
+           }
+           if(situaçao.equals("Ativo")){
+               autenticacao = true;
+           }else{
                return autenticacao;
            }
            
@@ -161,6 +183,7 @@ public class UsuarioDAO {
                 vendedor.setUsuario(rs.getString("nm_usuario"));
                 vendedor.setSenha(rs.getString("senha_usuario"));
                 vendedor.setCargo(rs.getString("cargo_vendedor"));
+                vendedor.setSituaçao(rs.getString("situaçao_vendedor"));
                 
                 vendedores.add(vendedor);
                 
@@ -178,6 +201,30 @@ public class UsuarioDAO {
         return vendedores;
     }
     
+    public List<Vendedor> getSituaçao(Vendedor vendedor){
+        
+        String sql = "Select situaçao_vendedor FROM tb_vendedor WHERE nm_vendedor = ?";
+        ResultSet rs;
+        List<Vendedor> vendedores = new ArrayList<Vendedor>();
+        
+        try{
+            PreparedStatement stmt = conecta.prepareStatement(sql);
+            stmt.setString(1, vendedor.getNome());
+            
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                vendedor.setSituaçao(rs.getString("situaçao_vendedor"));
+                vendedores.add(vendedor);
+            }else{
+                stmt.close();
+            }
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e);
+            
+        }
+        
+        return vendedores;
+    }
     
     public List<Vendedor> dadosUsuarioLogin(Vendedor vendedor){
         

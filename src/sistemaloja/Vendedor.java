@@ -14,6 +14,15 @@ public class Vendedor {
     private String usuario;
     private String senha;
     private String cargo;
+    private String situaçao;
+
+    public String getSituaçao() {
+        return situaçao;
+    }
+
+    public void setSituaçao(String situaçao) {
+        this.situaçao = situaçao;
+    }
 
     public String getCargo() {
         return cargo;

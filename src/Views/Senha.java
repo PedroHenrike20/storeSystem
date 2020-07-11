@@ -7,8 +7,6 @@ package Views;
 
 import DAO.*;
 import com.sun.glass.events.KeyEvent;
-import java.awt.CardLayout;
-import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import sistemaloja.Clientes;
 import sistemaloja.Compras;
@@ -35,6 +33,7 @@ public class Senha extends javax.swing.JFrame {
     }
     
     String nm_user = "";
+    String opc = "";
     
     String nome_geral = "";
     String nome_alternativo = "";
@@ -106,10 +105,11 @@ public class Senha extends javax.swing.JFrame {
     
     
     
-    public void setLabel(String acao, String nome, String usuario){
+    public void setLabel(String acao, String nome, String usuario, String opçao){
         jLabelSenhaConfirm.setText(acao);
         jLabelNomeSenha.setText(nome);
         nm_user = usuario;
+        opc = opçao;
     }
     public void getDadosVendedor(String nome, String nm_usuario, String senha ){
         nome_geral = nome;
@@ -272,11 +272,11 @@ public class Senha extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)
                                 .addComponent(jLabelNomeSenha))
                             .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jPassFinalCadFun, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(109, 109, 109))
+                .addGap(73, 73, 73))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,14 +311,12 @@ public class Senha extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelSenhaConfirm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 40, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 33, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,193 +366,190 @@ public class Senha extends javax.swing.JFrame {
         char[] pass = jPassFinalCadFun.getPassword();
         String senha = String.valueOf(pass);
         if(usDAO.validarLogin(nm_user, senha )== true){
-            autenticaçao = true;
-            
-          
-            
-            if(jLabelSenhaConfirm.getText().equals("finalizar o cadastro de um novo vendedor.")){
+            Vendedor vendedor = new Vendedor();
+            ClienteDAO clDAO = new ClienteDAO();
+            Clientes cliente = new Clientes();
+            Compras compra = new Compras();
+            VendaDAO vnDAO = new VendaDAO();
+            Pagamentos pagamento = new Pagamentos();
+            PagamentosDAO pgDAO = new PagamentosDAO();
+            switch(opc){
                 
-
-                Vendedor vendedor = new Vendedor();
-                vendedor.setNome(nome_geral);
-                vendedor.setUsuario(nome_usuario);
-                vendedor.setSenha(senha_usuario);
-                usDAO.salvarUsuarios(vendedor);
-                JOptionPane.showMessageDialog(this, "Usuário Cadastrado Com Sucesso!", "Atenção!",1);
-                limparVariaveis();
-                this.dispose();
+                case "01":
+                    
+                    vendedor.setNome(nome_geral);
+                    vendedor.setUsuario(nome_usuario);
+                    vendedor.setSenha(senha_usuario);
+                    usDAO.salvarUsuarios(vendedor);
+                    JOptionPane.showMessageDialog(this, "Usuário Cadastrado Com Sucesso!", "Atenção!",1);
+                    limparVariaveis();
+                    this.dispose();
+                    break;
+                    
+                case "02":
+                    
+                    cliente.setNome(nome_geral);
+                    cliente.setTelefone(telefone_cliente);
+                    cliente.setEndereco(endereco_cliente);
+                    cliente.setLimite(limite_cliente);
+                    cliente.setNm_vendedor(nome_alternativo);
                 
-            }else if(jLabelSenhaConfirm.getText().equals("finalizar o cadastro de um novo cliente.")){
-                ClienteDAO clDAO = new ClienteDAO();
-
-                Clientes cliente = new Clientes();
-                cliente.setNome(nome_geral);
-                cliente.setTelefone(telefone_cliente);
-                cliente.setEndereco(endereco_cliente);
-                cliente.setLimite(limite_cliente);
-                cliente.setNm_vendedor(nome_alternativo);
-                
-                clDAO.salvar(cliente);
-                JOptionPane.showMessageDialog(this, "Cliente Cadastrado Com Sucesso!", "Atenção!",1);
+                    clDAO.salvar(cliente);
+                    JOptionPane.showMessageDialog(this, "Cliente Cadastrado Com Sucesso!", "Atenção!",1);
      
-                limparVariaveis();
-                this.dispose();
-            }else if(jLabelSenhaConfirm.getText().equals("promover o funcionário.")){
+                    limparVariaveis();
+                    this.dispose();
+                    break;
+               
+                case "03":
+                    
+                    vendedor.setNome(nome_geral);
+                    vendedor.setCargo(cargo_usuario);
+                    usDAO.alteraCargo(vendedor);
+                
+                    JOptionPane.showMessageDialog(this, "Cargo Promovido com Sucesso!","Atenção!",1);
+                    limparVariaveis();
+                    this.dispose();
+                    break;
+                    
+                case "04":
+                    
+                    compra.setNome_cliente(nome_geral);
+                    compra.setDescricao(descricao_compra);
+                    compra.setDt_venda(data_compra);
+                    compra.setNm_vendedor(nome_alternativo);
+                    compra.setTelefone_cliente(telefone_cliente);
+                    compra.setValor_venda(valor_compra);
+                    
+                    vnDAO.addVendas(compra);
+                    
+                    cliente.setNome(nome_geral);
+                    cliente.setTelefone(telefone_cliente);
+                    cliente.setLimite(limite_cliente);
+                    
+                    clDAO.setLimite(cliente);
+                    JOptionPane.showMessageDialog(this, "Compra Adicionada Com Sucesso!","Atenção",1);
+                    limparVariaveis();
+                    this.dispose();
+                    break;
+                    
+                case "05":
+                    
+                    cliente.setNome(nome_geral);
+                    cliente.setTelefone(telefone_cliente);
+                    cliente.setEndereco(endereco_cliente);
+                    cliente.setLimite(limite_cliente);
+                
+                
+                    clDAO.alterarCliente(cliente);
+                    JOptionPane.showMessageDialog(this, "Alteração Realizada Com Sucesso!","Atenção!",1);
+                    limparVariaveis();
+                    this.dispose();
+                    break;
+                    
+                case "06":
+                    
+                    pagamento.setNome_cliente(nome_geral);
+                    pagamento.setTelefone_cliente(telefone_cliente);
+                    pagamento.setId_vendas(idCompra);
+                    pagamento.setDt_pagamento(data_secundaria);
+                    pagamento.setDt_compra(data_compra);
+                    pagamento.setDescricao(descricao_compra);
+                    pagamento.setTipo_venda("À Vista");
+                    pagamento.setValor_pago(valor_compra);
+                    pagamento.setNm_vendedor(nome_alternativo);
+                    pagamento.setValor_compra(valor_compra);
+                
+                    pgDAO.salvarPagamentos(pagamento);
                 
                
-                Vendedor vendedor = new Vendedor();
-                vendedor.setNome(nome_geral);
-                vendedor.setCargo(cargo_usuario);
-                usDAO.alteraCargo(vendedor);
+                    cliente.setLimite(limite_cliente);
+                    cliente.setNome(nome_geral);
+                    cliente.setTelefone(telefone_cliente);
                 
-                JOptionPane.showMessageDialog(this, "Cargo Promovido com Sucesso!","Atenção!",1);
-                limparVariaveis();
-                this.dispose();
-            }else if(jLabelSenhaConfirm.getText().equals("finalizar a compra do cliente")){
-        
-                Compras compra = new Compras();
-                compra.setNome_cliente(nome_geral);
-                compra.setDescricao(descricao_compra);
-                compra.setDt_venda(data_compra);
-                compra.setNm_vendedor(nome_alternativo);
-                compra.setTelefone_cliente(telefone_cliente);
-                compra.setValor_venda(valor_compra);
+                    clDAO.setLimite(cliente);
                 
-                VendaDAO vnDAO = new VendaDAO();
-                vnDAO.addVendas(compra);
                 
-                Clientes cliente = new Clientes();
-                
-                cliente.setNome(nome_geral);
-                cliente.setTelefone(telefone_cliente);
-                cliente.setLimite(limite_cliente);
-                
-                ClienteDAO cl = new ClienteDAO();
-                cl.setLimite(cliente);
-         
-                
-                JOptionPane.showMessageDialog(this, "Compra Adicionada Com Sucesso!","Atenção",1);
-                limparVariaveis();
-                this.dispose();
-            }else if(jLabelSenhaConfirm.getText().equals("finalizar a alteração do cliente.")){
-                Clientes cliente = new Clientes();
-                cliente.setNome(nome_geral);
-                cliente.setTelefone(telefone_cliente);
-                cliente.setEndereco(endereco_cliente);
-                cliente.setLimite(limite_cliente);
-                
-                ClienteDAO clDAO = new ClienteDAO();
-                clDAO.alterarCliente(cliente);
-                JOptionPane.showMessageDialog(this, "Alteração Realizada Com Sucesso!","Atenção!",1);
-                limparVariaveis();
-                this.dispose();
-            }else if(jLabelSenhaConfirm.getText().equals("finalizar o recebimento da compra.")){
-                Pagamentos pagamento = new Pagamentos();
-                pagamento.setNome_cliente(nome_geral);
-                pagamento.setTelefone_cliente(telefone_cliente);
-                pagamento.setId_vendas(idCompra);
-                pagamento.setDt_pagamento(data_secundaria);
-                pagamento.setDt_compra(data_compra);
-                pagamento.setDescricao(descricao_compra);
-                pagamento.setTipo_venda("À Vista");
-                pagamento.setValor_pago(valor_compra);
-                pagamento.setNm_vendedor(nome_alternativo);
-                pagamento.setValor_compra(valor_compra);
-                
-                PagamentosDAO pgDAO = new PagamentosDAO();
-                pgDAO.salvarPagamentos(pagamento);
-                
-                Clientes cliente = new Clientes();
-                cliente.setLimite(limite_cliente);
-                cliente.setNome(nome_geral);
-                cliente.setTelefone(telefone_cliente);
-                ClienteDAO clDAO = new ClienteDAO();
-                clDAO.setLimite(cliente);
-                
-                Compras compra = new Compras();
-                VendaDAO vnDAO = new VendaDAO();
-                compra.setId_venda(idCompra);
-                compra.setSituacao("PAGO");
-                vnDAO.resolveCompras(compra);
-                
-                JOptionPane.showMessageDialog(this, "Compra Recebida Com Sucesso!", "Atenção!",1);
-                limparVariaveis();
-                this.dispose();
-                
-            }else if(jLabelSenhaConfirm.getText().equals("tornar o cliente inativo.")){
-                Clientes cliente = new Clientes();
-                
-                cliente.setNome(nome_geral);
-                cliente.setTelefone(telefone_cliente);
-                cliente.setSituacao("AUSENTE");
-                
-                ClienteDAO clDAO = new ClienteDAO();
-                clDAO.setStatus(cliente);
-       
-                JOptionPane.showMessageDialog(this, "Cliente Indisponível Temporariamente!","Atenção!",1);
-                limparVariaveis();
-                this.dispose();
-                
-            }else if(jLabelSenhaConfirm.getText().equals("ativar o cliente.")){
-                Clientes cliente = new Clientes();
-                cliente.setNome(nome_geral);
-                cliente.setTelefone(telefone_cliente);
-                cliente.setSituacao("Ativo");
-                
-                ClienteDAO clDAO = new ClienteDAO();
-                clDAO.setStatus(cliente);
-                JOptionPane.showMessageDialog(this, "Cliente Disponível Para Novas Compras!","Atenção!",1);
-                limparVariaveis();
-                this.dispose();
-                
-            }else if(jLabelSenhaConfirm.getText().equals("finalizar o acordo de compras do cliente.")){
-                Pagamentos pagamento = new Pagamentos();
-                pagamento.setDescricao(descricao_compra);
-                pagamento.setDt_compra(data_compra);
-                pagamento.setDt_pagamento(data_secundaria);
-                pagamento.setId_vendas(idCompra);
-                pagamento.setNm_vendedor(nome_alternativo);
-                pagamento.setNome_cliente(nome_geral);
-                pagamento.setTelefone_cliente(telefone_cliente);
-                pagamento.setTipo_venda("Acordo");
-                pagamento.setValor_compra(valor_compra);
-                pagamento.setValor_pago(valorPg_Compraa);
-                
-                PagamentosDAO pgDAO = new PagamentosDAO();
-                pgDAO.salvarPagamentos(pagamento);
-                
-                Clientes cliente = new Clientes();
-                cliente.setLimite(limite_cliente);
-                cliente.setNome(nome_geral);
-                cliente.setTelefone(telefone_cliente);
-                
-                ClienteDAO clDAO = new ClienteDAO();
-                clDAO.setLimite(cliente);
-                
-                Compras compra = new Compras();
-                if(valor_restanteCompra == 0){
+                    compra.setId_venda(idCompra);
                     compra.setSituacao("PAGO");
-                }else{
+                    vnDAO.resolveCompras(compra);
+                
+                    JOptionPane.showMessageDialog(this, "Compra Recebida Com Sucesso!", "Atenção!",1);
+                    limparVariaveis();
+                    this.dispose();
+                    break;
+                    
+                case "07": 
+                    
+                    cliente.setNome(nome_geral);
+                    cliente.setTelefone(telefone_cliente);
+                    cliente.setSituacao("AUSENTE");
+                
+                
+                    clDAO.setStatus(cliente);
+       
+                    JOptionPane.showMessageDialog(this, "Cliente Indisponível Temporariamente!","Atenção!",1);
+                    limparVariaveis();
+                    this.dispose();
+                    break;
+                    
+                case "08":
+                    
+                    cliente.setNome(nome_geral);
+                    cliente.setTelefone(telefone_cliente);
+                    cliente.setSituacao("Ativo");
+                
+                    clDAO.setStatus(cliente);
+                    JOptionPane.showMessageDialog(this, "Cliente Disponível Para Novas Compras!","Atenção!",1);
+                    limparVariaveis();
+                    this.dispose();
+                    break;
+                    
+                case "09":
+                    
+                    pagamento.setDescricao(descricao_compra);
+                    pagamento.setDt_compra(data_compra);
+                    pagamento.setDt_pagamento(data_secundaria);
+                    pagamento.setId_vendas(idCompra);
+                    pagamento.setNm_vendedor(nome_alternativo);
+                    pagamento.setNome_cliente(nome_geral);
+                    pagamento.setTelefone_cliente(telefone_cliente);
+                    pagamento.setTipo_venda("Acordo");
+                    pagamento.setValor_compra(valor_compra);
+                    pagamento.setValor_pago(valorPg_Compraa);
+                
+         
+                    pgDAO.salvarPagamentos(pagamento);
+                
+          
+                    cliente.setLimite(limite_cliente);
+                    cliente.setNome(nome_geral);
+                    cliente.setTelefone(telefone_cliente);
+                
+           
+                    clDAO.setLimite(cliente);
+                
                     compra.setSituacao("PENDENTE");
-                }
-                compra.setValor_venda(valor_restanteCompra);
-                compra.setId_venda(idCompra);
-                VendaDAO vnDAO = new VendaDAO();
-                vnDAO.resolveAcordoCompras(compra);
+                    compra.setValor_venda(valor_restanteCompra);
+                    compra.setId_venda(idCompra);
+          
+                    vnDAO.resolveAcordoCompras(compra);
                 
-                JOptionPane.showMessageDialog(this, "Acordo Realizado Com Sucesso!", "Alerta!",1);
-                limparVariaveis();
-                this.dispose();
-            }else if(jLabelSenhaConfirm.getText().equals("finalizar a alteração de um funcionário.")){
-                Vendedor vendedor = new Vendedor();
-                vendedor.setNome(nome_geral);
-                vendedor.setUsuario(nome_usuario);
-                vendedor.setSenha(senha_usuario);
+                    JOptionPane.showMessageDialog(this, "Acordo Realizado Com Sucesso!", "Alerta!",1);
+                    limparVariaveis();
+                    this.dispose();
+                    break;
+                    
+                case "10":
+                    vendedor.setNome(nome_geral);
+                    vendedor.setUsuario(nome_usuario);
+                    vendedor.setSenha(senha_usuario);
                 
-                usDAO.alterarUsuario(vendedor);
-                JOptionPane.showMessageDialog(this, "Os Dados Foram Atualizados Com Sucesso!","Alerta!",1);
-                limparVariaveis();
-                this.dispose();   
+                    usDAO.alterarUsuario(vendedor);
+                    JOptionPane.showMessageDialog(this, "Os Dados Foram Atualizados Com Sucesso!","Alerta!",1);
+                    limparVariaveis();
+                    this.dispose();
+                    break;                  
                 
             }
             
@@ -576,186 +571,197 @@ public class Senha extends javax.swing.JFrame {
         String senha = String.valueOf(pass);
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             if(usDAO.validarLogin(nm_user, senha )== true){
-            
-                if(jLabelSenhaConfirm.getText().equals("finalizar o cadastro de um novo vendedor.")){
                 
-
-                    Vendedor vendedor = new Vendedor();
-                    vendedor.setNome(nome_geral);
-                    vendedor.setUsuario(nome_usuario);
-                    vendedor.setSenha(senha_usuario);
-                    usDAO.salvarUsuarios(vendedor);
-                    JOptionPane.showMessageDialog(this, "Usuário Cadastrado Com Sucesso!", "Atenção!",1);
-                    limparVariaveis();
-                    this.dispose();
                 
-                }else if(jLabelSenhaConfirm.getText().equals("finalizar o cadastro de um novo cliente.")){
-                    ClienteDAO clDAO = new ClienteDAO();
-
-                    Clientes cliente = new Clientes();
-                    cliente.setNome(nome_geral);
-                    cliente.setTelefone(telefone_cliente);
-                    cliente.setEndereco(endereco_cliente);
-                    cliente.setLimite(limite_cliente);
-                    cliente.setNm_vendedor(nome_alternativo);
-
-                    clDAO.salvar(cliente);
-                    JOptionPane.showMessageDialog(this, "Cliente Cadastrado Com Sucesso!", "Atenção!",1);
-                    limparVariaveis();
-                    this.dispose();
+                Vendedor vendedor = new Vendedor();
+                ClienteDAO clDAO = new ClienteDAO();
+                Clientes cliente = new Clientes();
+                Compras compra = new Compras();
+                VendaDAO vnDAO = new VendaDAO();
+                Pagamentos pagamento = new Pagamentos();
+                PagamentosDAO pgDAO = new PagamentosDAO();
+                switch(opc){
+                    
                 
-                }else if(jLabelSenhaConfirm.getText().equals("promover o funcionário.")){
+                    case "01":
+                    
+                        vendedor.setNome(nome_geral);
+                        vendedor.setUsuario(nome_usuario);
+                        vendedor.setSenha(senha_usuario);
+                        usDAO.salvarUsuarios(vendedor);
+                        JOptionPane.showMessageDialog(this, "Usuário Cadastrado Com Sucesso!", "Atenção!",1);
+                        limparVariaveis();
+                        this.dispose();
+                        break;
+                    
+                    case "02":
+                    
+                        cliente.setNome(nome_geral);
+                        cliente.setTelefone(telefone_cliente);
+                        cliente.setEndereco(endereco_cliente);
+                        cliente.setLimite(limite_cliente);
+                        cliente.setNm_vendedor(nome_alternativo);
                 
-                    Vendedor vendedor = new Vendedor();
-                    vendedor.setNome(nome_geral);
-                    vendedor.setCargo(cargo_usuario);
-                    usDAO.alteraCargo(vendedor);
-
-                    JOptionPane.showMessageDialog(this, "Cargo Promovido com Sucesso!","Atenção!",1);
-                    limparVariaveis();
-                    this.dispose();
+                        clDAO.salvar(cliente);
+                        JOptionPane.showMessageDialog(this, "Cliente Cadastrado Com Sucesso!", "Atenção!",1);
+     
+                        limparVariaveis();
+                        this.dispose();
+                        break;
                
-                }else if(jLabelSenhaConfirm.getText().equals("finalizar a compra do cliente")){
-            
-                    //double limiteCliente = limite_cliente - valor_compra;
-                    //String limiteArredondado = new DecimalFormat("#,##0.00").format(limiteCliente);
-                    //String limiteA = limiteArredondado.replace(",", ".");
-                    //double limiteFinal = Double.valueOf(limiteA);
-
-                    Compras compra = new Compras();
-
-
-                    compra.setNome_cliente(nome_geral);
-                    compra.setDescricao(descricao_compra);
-                    compra.setDt_venda(data_compra);
-                    compra.setNm_vendedor(nome_alternativo);
-                    compra.setTelefone_cliente(telefone_cliente);
-                    compra.setValor_venda(valor_compra);
-
-                    VendaDAO vnDAO = new VendaDAO();
-                    vnDAO.addVendas(compra);
-
-                    Clientes cliente = new Clientes();
-
-                    cliente.setNome(nome_geral);
-                    cliente.setTelefone(telefone_cliente);
-                    cliente.setLimite(limite_cliente);
-
-                    ClienteDAO cl = new ClienteDAO();
-                    cl.setLimite(cliente);
-
-                    JOptionPane.showMessageDialog(this, "Compra Adicionada Com Sucesso!","Atenção",1);
-                    limparVariaveis();
-                    this.dispose();
+                    case "03":
+                    
+                        vendedor.setNome(nome_geral);
+                        vendedor.setCargo(cargo_usuario);
+                        usDAO.alteraCargo(vendedor);
+                
+                        JOptionPane.showMessageDialog(this, "Cargo Promovido com Sucesso!","Atenção!",1);
+                        limparVariaveis();
+                        this.dispose();
+                        break;
+                    
+                    case "04":
+                    
+                        compra.setNome_cliente(nome_geral);
+                        compra.setDescricao(descricao_compra);
+                        compra.setDt_venda(data_compra);
+                        compra.setNm_vendedor(nome_alternativo);
+                        compra.setTelefone_cliente(telefone_cliente);
+                        compra.setValor_venda(valor_compra);
+                    
+                        vnDAO.addVendas(compra);
+                    
+                        cliente.setNome(nome_geral);
+                        cliente.setTelefone(telefone_cliente);
+                        cliente.setLimite(limite_cliente);
+                    
+                        clDAO.setLimite(cliente);
+                        JOptionPane.showMessageDialog(this, "Compra Adicionada Com Sucesso!","Atenção",1);
+                        limparVariaveis();
+                        this.dispose();
+                        break;
+                    
+                    case "05":
+                    
+                        cliente.setNome(nome_geral);
+                        cliente.setTelefone(telefone_cliente);
+                        cliente.setEndereco(endereco_cliente);
+                        cliente.setLimite(limite_cliente);
+                
+                
+                        clDAO.alterarCliente(cliente);
+                        JOptionPane.showMessageDialog(this, "Alteração Realizada Com Sucesso!","Atenção!",1);
+                        limparVariaveis();
+                        this.dispose();
+                        break;
+                    
+                    case "06":
+                    
+                        pagamento.setNome_cliente(nome_geral);
+                        pagamento.setTelefone_cliente(telefone_cliente);
+                        pagamento.setId_vendas(idCompra);
+                        pagamento.setDt_pagamento(data_secundaria);
+                        pagamento.setDt_compra(data_compra);
+                        pagamento.setDescricao(descricao_compra);
+                        pagamento.setTipo_venda("À Vista");
+                        pagamento.setValor_pago(valor_compra);
+                        pagamento.setNm_vendedor(nome_alternativo);
+                        pagamento.setValor_compra(valor_compra);
+                
+                        pgDAO.salvarPagamentos(pagamento);
+                
+               
+                        cliente.setLimite(limite_cliente);
+                        cliente.setNome(nome_geral);
+                        cliente.setTelefone(telefone_cliente);
+                
+                        clDAO.setLimite(cliente);
+                
+                
+                        compra.setId_venda(idCompra);
+                        compra.setSituacao("PAGO");
+                        vnDAO.resolveCompras(compra);
+                
+                        JOptionPane.showMessageDialog(this, "Compra Recebida Com Sucesso!", "Atenção!",1);
+                        limparVariaveis();
+                        this.dispose();
+                        break;
+                    
+                    case "07": 
+                    
+                        cliente.setNome(nome_geral);
+                        cliente.setTelefone(telefone_cliente);
+                        cliente.setSituacao("AUSENTE");
+                
+                
+                        clDAO.setStatus(cliente);
+       
+                        JOptionPane.showMessageDialog(this, "Cliente Indisponível Temporariamente!","Atenção!",1);
+                        limparVariaveis();
+                        this.dispose();
+                        break;
+                    
+                    case "08":
+                        
+                    
+                        cliente.setNome(nome_geral);
+                        cliente.setTelefone(telefone_cliente);
+                        cliente.setSituacao("Ativo");
+                
+                        clDAO.setStatus(cliente);
+                        JOptionPane.showMessageDialog(this, "Cliente Disponível Para Novas Compras!","Atenção!",1);
+                        limparVariaveis();
+                        this.dispose();
+                        break;
+                    
+                    case "09":
+                    
+                        pagamento.setDescricao(descricao_compra);
+                        pagamento.setDt_compra(data_compra);
+                        pagamento.setDt_pagamento(data_secundaria);
+                        pagamento.setId_vendas(idCompra);
+                        pagamento.setNm_vendedor(nome_alternativo);
+                        pagamento.setNome_cliente(nome_geral);
+                        pagamento.setTelefone_cliente(telefone_cliente);
+                        pagamento.setTipo_venda("Acordo");
+                        pagamento.setValor_compra(valor_compra);
+                        pagamento.setValor_pago(valorPg_Compraa);
+                
+         
+                        pgDAO.salvarPagamentos(pagamento);
+                
+          
+                        cliente.setLimite(limite_cliente);
+                        cliente.setNome(nome_geral);
+                        cliente.setTelefone(telefone_cliente);
                 
            
-                }else if(jLabelSenhaConfirm.getText().equals("finalizar o recebimento da compra")){
-                    Pagamentos pagamento = new Pagamentos();
-                    pagamento.setNome_cliente(nome_geral);
-                    pagamento.setTelefone_cliente(telefone_cliente);
-                    pagamento.setId_vendas(idCompra);
-                    pagamento.setDt_pagamento(data_secundaria);
-                    pagamento.setDt_compra(data_compra);
-                    pagamento.setDescricao(descricao_compra);
-                    pagamento.setTipo_venda("À Vista");
-                    pagamento.setValor_pago(valorPg_Compraa);
-                    pagamento.setValor_compra(valor_compra);
-                    pagamento.setNm_vendedor(nome_alternativo);
-
-                    PagamentosDAO pgDAO = new PagamentosDAO();
-                    pgDAO.salvarPagamentos(pagamento);
-
-                    Clientes cliente = new Clientes();
-                    cliente.setLimite(limite_cliente);
-                    cliente.setNome(nome_geral);
-                    cliente.setTelefone(telefone_cliente);
-                    ClienteDAO clDAO = new ClienteDAO();
-                    clDAO.setLimite(cliente);
-
-                    Compras compra = new Compras();
-                    VendaDAO vnDAO = new VendaDAO();
-                    compra.setId_venda(idCompra);
-                    compra.setSituacao("PAGO");
-                    vnDAO.resolveCompras(compra);
-
-                    JOptionPane.showMessageDialog(this, "Compra Recebida Com Sucesso!", "Atenção!",1);
-                    limparVariaveis();
-                    this.dispose();
-                }else if(jLabelSenhaConfirm.getText().equals("tornar o cliente inativo.")){
-                    Clientes cliente = new Clientes();
-
-                    cliente.setNome(nome_geral);
-                    cliente.setTelefone(telefone_cliente);
-                    cliente.setSituacao("AUSENTE");
-
-                    ClienteDAO clDAO = new ClienteDAO();
-                    clDAO.setStatus(cliente);
-                    JOptionPane.showMessageDialog(this, "Cliente Indisponível Temporariamente!","Atenção!",1);
-                    limparVariaveis();
-                    this.dispose();
-            
-                }else if(jLabelSenhaConfirm.getText().equals("ativar o cliente.")){
-                    Clientes cliente = new Clientes();
-                    cliente.setNome(nome_geral);
-                    cliente.setTelefone(telefone_cliente);
-                    cliente.setSituacao("Ativo");
-
-                    ClienteDAO clDAO = new ClienteDAO();
-                    clDAO.setStatus(cliente);
-                    JOptionPane.showMessageDialog(this, "Cliente Disponível Para Novas Compras!","Atenção!",1);
-                    limparVariaveis();
-                    this.dispose();
-                }else if(jLabelSenhaConfirm.getText().equals("finalizar o acordo de compras do cliente.")){
-                    Pagamentos pagamento = new Pagamentos();
-                    pagamento.setDescricao(descricao_compra);
-                    pagamento.setDt_compra(data_compra);
-                    pagamento.setDt_pagamento(data_secundaria);
-                    pagamento.setId_vendas(idCompra);
-                    pagamento.setNm_vendedor(nome_alternativo);
-                    pagamento.setNome_cliente(nome_geral);
-                    pagamento.setTelefone_cliente(telefone_cliente);
-                    pagamento.setTipo_venda("Acordo");
-                    pagamento.setValor_compra(valor_compra);
-                    pagamento.setValor_pago(valorPg_Compraa);
-
-                    PagamentosDAO pgDAO = new PagamentosDAO();
-                    pgDAO.salvarPagamentos(pagamento);
-
-                    Clientes cliente = new Clientes();
-                    cliente.setLimite(limite_cliente);
-                    cliente.setNome(nome_geral);
-                    cliente.setTelefone(telefone_cliente);
-
-                    ClienteDAO clDAO = new ClienteDAO();
-                    clDAO.setLimite(cliente);
-
-                    Compras compra = new Compras();
-                    if(valor_restanteCompra == 0){
-                        compra.setSituacao("PAGO");
-                    }else{
+                        clDAO.setLimite(cliente);
+                
                         compra.setSituacao("PENDENTE");
-                    }
-                    compra.setValor_venda(valor_restanteCompra);
-                    compra.setId_venda(idCompra);
-                    VendaDAO vnDAO = new VendaDAO();
-                    vnDAO.resolveAcordoCompras(compra);
-
-                    JOptionPane.showMessageDialog(this, "Acordo Realizado Com Sucesso!", "Alerta!",1);
-                    limparVariaveis();
-                    this.dispose();
-                }else if(jLabelSenhaConfirm.getText().equals("finalizar a alteração de um funcionário.")){
-                    Vendedor vendedor = new Vendedor();
-                    vendedor.setNome(nome_geral);
-                    vendedor.setUsuario(nome_usuario);
-                    vendedor.setSenha(senha_usuario);
+                        compra.setValor_venda(valor_restanteCompra);
+                        compra.setId_venda(idCompra);
+          
+                        vnDAO.resolveAcordoCompras(compra);
                 
-                    usDAO.alterarUsuario(vendedor);
-                    JOptionPane.showMessageDialog(this, "Os Dados Foram Atualizados Com Sucesso!","Alerta!",1);
-                    limparVariaveis();
-                    this.dispose();   
+                        JOptionPane.showMessageDialog(this, "Acordo Realizado Com Sucesso!", "Alerta!",1);
+                        limparVariaveis();
+                        this.dispose();
+                        break;
+                    
+                    case "10":
+                        vendedor.setNome(nome_geral);
+                        vendedor.setUsuario(nome_usuario);
+                        vendedor.setSenha(senha_usuario);
+                
+                        usDAO.alterarUsuario(vendedor);
+                        JOptionPane.showMessageDialog(this, "Os Dados Foram Atualizados Com Sucesso!","Alerta!",1);
+                        limparVariaveis();
+                        this.dispose();
+                        break;                  
+                
                 }
-            
-                
+             
             
             }else{               
                  JOptionPane.showMessageDialog(this, "Senha Incorreta, tente novamente!", "Alerta!",1);

@@ -6,6 +6,7 @@ create table tb_vendedor(
 	nm_usuario character varying(40),
 	senha_usuario character varying(30),
 	cargo_vendedor character varying(30),
+	situaçao_vendedor character varying(20),
 	
 CONSTRAINT pk_tb_vendedor_nm_vendedor PRIMARY KEY(nm_vendedor)
 
@@ -21,7 +22,7 @@ create table tb_clientes(
 	nm_vendedor character varying(80),
 	valor_limite double precision,
 	
-CONSTRAINT pk_tb_clientes_nm_cliente_telefone_cliente PRIMARY KEY(nm_cliente, telefone_cliente),
+CONSTRAINT pk_tb_clientes_nm_cliente PRIMARY KEY(nm_cliente),
 CONSTRAINT fk_tb_clientes_tb_vendedor_nm_vendedor FOREIGN KEY(nm_vendedor)
 	REFERENCES tb_vendedor(nm_vendedor)
 	
@@ -41,8 +42,8 @@ create table tb_vendas(
 	nm_vendedor character varying(80),
 	
 CONSTRAINT pk_tb_vendas_id_vendas PRIMARY KEY(id_vendas),
-CONSTRAINT fk_tb_vendas_tb_clientes_nm_cliente_telefone_cliente FOREIGN KEY(nm_cliente,telefone_cliente)
-	REFERENCES tb_clientes(nm_cliente, telefone_cliente),
+CONSTRAINT fk_tb_vendas_tb_clientes_nm_cliente FOREIGN KEY(nm_cliente)
+	REFERENCES tb_clientes(nm_cliente),
 CONSTRAINT fk_tb_vendas_tb_vendedor_nm_vendedor FOREIGN KEY(nm_vendedor)
 	REFERENCES tb_vendedor(nm_vendedor)	
 );
@@ -63,8 +64,8 @@ create table tb_pagamentos(
 	valor_compra double precision,
 
 CONSTRAINT pk_tb_pagamentos_id_pagamentos PRIMARY KEY(id_pagamentos),
-CONSTRAINT fk_tb_pagamentos_tb_clientes_nm_cliente_telefone_cliente FOREIGN KEY(nm_cliente, telefone_cliente)
-	REFERENCES tb_clientes(nm_cliente, telefone_cliente),
+CONSTRAINT fk_tb_pagamentos_tb_clientes_nm_cliente FOREIGN KEY(nm_cliente)
+	REFERENCES tb_clientes(nm_cliente),
 CONSTRAINT fk_tb_pagamentos_tb_vendedor_nm_vendedor FOREIGN KEY(nm_vendedor)
 	REFERENCES tb_vendedor(nm_vendedor),
 CONSTRAINT fk_tb_pagamentos_tb_vendas_id_vendas FOREIGN KEY(id_vendas)

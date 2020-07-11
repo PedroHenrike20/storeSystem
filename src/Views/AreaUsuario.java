@@ -33,6 +33,7 @@ public class AreaUsuario extends javax.swing.JFrame {
     Vendedor sessao;
     double valorLimite = 0;
     
+    
     public void listarTabelaCompra(String nome, String telefone){
         DefaultTableModel valor = (DefaultTableModel) jTableComprasCliente.getModel();
         
@@ -52,8 +53,9 @@ public class AreaUsuario extends javax.swing.JFrame {
     public double setValorDouble(String valor){
         String valorA = valor.replace(".", "");
         String valorB = valorA.replace(",", ".");
+        String valorC = valorB.replace("R$", "");
         
-        double valorFinal = Double.valueOf(valorB);
+        double valorFinal = Double.valueOf(valorC);
         return valorFinal;
     }
     
@@ -355,7 +357,6 @@ public class AreaUsuario extends javax.swing.JFrame {
         jLabel93 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jFormattedAlterarDados = new javax.swing.JFormattedTextField();
-        jLabel43 = new javax.swing.JLabel();
         jFormattedTxtTelefone = new javax.swing.JFormattedTextField();
         jLabel89 = new javax.swing.JLabel();
         jLabel90 = new javax.swing.JLabel();
@@ -373,7 +374,7 @@ public class AreaUsuario extends javax.swing.JFrame {
         jTableFuncionario = new javax.swing.JTable();
         jPanelBtns = new javax.swing.JPanel();
         jPanelBtnApagar = new javax.swing.JPanel();
-        jBtnApagar = new javax.swing.JButton();
+        jBtnTornarInativo = new javax.swing.JButton();
         jBtnVerDetalhesFuncionario = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jTxtNomeFuncCad = new javax.swing.JTextField();
@@ -473,6 +474,8 @@ public class AreaUsuario extends javax.swing.JFrame {
         jLabelVendasRecInfoFun = new javax.swing.JLabel();
         jLabel59 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel43 = new javax.swing.JLabel();
+        jLabelStatusColaborador = new javax.swing.JLabel();
         jBtnVoltarTelaFuncionario = new javax.swing.JButton();
         jPanelAddCompraCliente = new javax.swing.JPanel();
         jLabel54 = new javax.swing.JLabel();
@@ -506,6 +509,10 @@ public class AreaUsuario extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
+        jPanelSituaçaoFuncionario = new javax.swing.JPanel();
+        jLabel63 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jCheckAtivarFun = new javax.swing.JCheckBox();
         jLabel73 = new javax.swing.JLabel();
         jSeparator11 = new javax.swing.JSeparator();
         jBtnAlterarFun = new javax.swing.JButton();
@@ -1383,10 +1390,6 @@ public class AreaUsuario extends javax.swing.JFrame {
             }
         });
 
-        jLabel43.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel43.setText("R$");
-
         try {
             jFormattedTxtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)# ####-####")));
         } catch (java.text.ParseException ex) {
@@ -1423,18 +1426,13 @@ public class AreaUsuario extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel40)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                    .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jFormattedAlterarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel18)
-                                    .addComponent(jLabel20)
-                                    .addComponent(jLabel19)
-                                    .addComponent(jTxtNomeAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                                    .addComponent(jTxtEnderecoAlterarClientes)))
-                            .addComponent(jFormattedTxtTelefone))))
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel19)
+                            .addComponent(jTxtNomeAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                            .addComponent(jTxtEnderecoAlterarClientes)
+                            .addComponent(jFormattedTxtTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                            .addComponent(jFormattedAlterarDados, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGap(130, 130, 130))
         );
         jPanel4Layout.setVerticalGroup(
@@ -1468,12 +1466,10 @@ public class AreaUsuario extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel40)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jFormattedAlterarDados)
-                            .addComponent(jLabel43, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
+                        .addComponent(jFormattedAlterarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(jLabel92, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)))
+                        .addComponent(jLabel92, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelMostrarSituação, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1602,10 +1598,10 @@ public class AreaUsuario extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTableFuncionario);
 
-        jBtnApagar.setText("Apagar");
-        jBtnApagar.addActionListener(new java.awt.event.ActionListener() {
+        jBtnTornarInativo.setText("Tornar Inativo");
+        jBtnTornarInativo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnApagarActionPerformed(evt);
+                jBtnTornarInativoActionPerformed(evt);
             }
         });
 
@@ -1615,14 +1611,14 @@ public class AreaUsuario extends javax.swing.JFrame {
             jPanelBtnApagarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBtnApagarLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBtnApagar)
+                .addComponent(jBtnTornarInativo)
                 .addContainerGap())
         );
         jPanelBtnApagarLayout.setVerticalGroup(
             jPanelBtnApagarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBtnApagarLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jBtnApagar))
+                .addComponent(jBtnTornarInativo))
         );
 
         jBtnVerDetalhesFuncionario.setText("Ver Detalhes");
@@ -2249,7 +2245,7 @@ public class AreaUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel47)
                     .addComponent(jPanelExcluirCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelEndereçoDetalhesCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -2271,7 +2267,7 @@ public class AreaUsuario extends javax.swing.JFrame {
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
+                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -2608,6 +2604,11 @@ public class AreaUsuario extends javax.swing.JFrame {
             }
         });
 
+        jLabel43.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel43.setText("Status");
+
+        jLabelStatusColaborador.setText("jLabel63");
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
@@ -2618,30 +2619,28 @@ public class AreaUsuario extends javax.swing.JFrame {
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabelUsuarioFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                .addComponent(jLabel52, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabelNomeFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel55)
+                            .addComponent(jLabelCargoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel57))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel15Layout.createSequentialGroup()
-                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jLabelUsuarioFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                        .addComponent(jLabel52, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabelNomeFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jLabel55))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel15Layout.createSequentialGroup()
-                                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jPanelSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel59))
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton1)
-                                            .addComponent(jCheckSenhaColaborador))
-                                        .addGap(9, 9, 9))))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jCheckSenhaColaborador)
+                                .addGap(9, 9, 9))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel15Layout.createSequentialGroup()
                                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelCargoFuncionario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel57, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(jPanelSenha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel59, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel43, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jButton1)
+                                        .addComponent(jLabelStatusColaborador, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -2659,12 +2658,11 @@ public class AreaUsuario extends javax.swing.JFrame {
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                        .addContainerGap(22, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel15Layout.createSequentialGroup()
                                 .addComponent(jLabel52)
@@ -2678,19 +2676,24 @@ public class AreaUsuario extends javax.swing.JFrame {
                                 .addComponent(jPanelSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCheckSenhaColaborador)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelUsuarioFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel43))
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel15Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelUsuarioFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel57)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabelCargoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelStatusColaborador, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelCargoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)))))
+                                .addGap(13, 13, 13)
+                                .addComponent(jButton1)))))
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
@@ -2701,7 +2704,7 @@ public class AreaUsuario extends javax.swing.JFrame {
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabelVendasMarcadasInfoFun, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
                             .addComponent(jLabelVendasRecInfoFun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(60, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                         .addComponent(jPanelPromover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
@@ -2732,7 +2735,7 @@ public class AreaUsuario extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)
                                     .addComponent(jLabelNomeFun)))
                             .addGap(53, 53, 53))))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         jPanelInfoFuncionarioLayout.setVerticalGroup(
             jPanelInfoFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2747,7 +2750,7 @@ public class AreaUsuario extends javax.swing.JFrame {
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnVoltarTelaFuncionario)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.add(jPanelInfoFuncionario, "TelaFuncionario");
@@ -2980,6 +2983,48 @@ public class AreaUsuario extends javax.swing.JFrame {
         jLabel50.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel50.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-particular-2-50.png"))); // NOI18N
 
+        jPanelSituaçaoFuncionario.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel63.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel63.setText("Situação ");
+
+        jButton2.setText("Ativar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jCheckAtivarFun.setBackground(new java.awt.Color(204, 204, 204));
+        jCheckAtivarFun.setText("Ativar Funcionário");
+
+        javax.swing.GroupLayout jPanelSituaçaoFuncionarioLayout = new javax.swing.GroupLayout(jPanelSituaçaoFuncionario);
+        jPanelSituaçaoFuncionario.setLayout(jPanelSituaçaoFuncionarioLayout);
+        jPanelSituaçaoFuncionarioLayout.setHorizontalGroup(
+            jPanelSituaçaoFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSituaçaoFuncionarioLayout.createSequentialGroup()
+                .addComponent(jLabel63)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanelSituaçaoFuncionarioLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jCheckAtivarFun, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2))
+        );
+        jPanelSituaçaoFuncionarioLayout.setVerticalGroup(
+            jPanelSituaçaoFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSituaçaoFuncionarioLayout.createSequentialGroup()
+                .addComponent(jLabel63)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelSituaçaoFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelSituaçaoFuncionarioLayout.createSequentialGroup()
+                        .addGap(0, 20, Short.MAX_VALUE)
+                        .addComponent(jButton2))
+                    .addGroup(jPanelSituaçaoFuncionarioLayout.createSequentialGroup()
+                        .addComponent(jCheckAtivarFun)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
@@ -2992,18 +3037,22 @@ public class AreaUsuario extends javax.swing.JFrame {
                     .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckMostrarSenha)
                     .addComponent(jLabel74)
                     .addComponent(jTxtNomeFunEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTxtNmUsuarioEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel75)
                     .addComponent(jPassSenhaFuncEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel76))
+                    .addComponent(jLabel76)
+                    .addComponent(jCheckMostrarSenha))
                 .addContainerGap(128, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelSituaçaoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(128, 128, 128))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+            .addGroup(jPanel18Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel18Layout.createSequentialGroup()
@@ -3020,16 +3069,18 @@ public class AreaUsuario extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTxtNmUsuarioEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
                         .addComponent(jLabel76)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPassSenhaFuncEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel50, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCheckMostrarSenha)
-                .addGap(27, 27, 27))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanelSituaçaoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jLabel73.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -3082,13 +3133,13 @@ public class AreaUsuario extends javax.swing.JFrame {
                 .addComponent(jLabel73)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator11, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelAlterarDadosFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnAlterarFun)
                     .addComponent(jButton3))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jPanel2.add(jPanelAlterarDadosFunc, "TelaAlterarFun");
@@ -3437,7 +3488,7 @@ public class AreaUsuario extends javax.swing.JFrame {
                     .addGroup(jPanelDetalhesCompraLayout.createSequentialGroup()
                         .addComponent(jLabel77)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabelNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator12, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnVoltarComprasDetalhes, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap(24, Short.MAX_VALUE))
@@ -3969,7 +4020,7 @@ public class AreaUsuario extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addGroup(jPanelRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelRelatoriosLayout.createSequentialGroup()
-                        .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, 528, Short.MAX_VALUE)
+                        .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanelRelatoriosLayout.createSequentialGroup()
                         .addGroup(jPanelRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4004,6 +4055,9 @@ public class AreaUsuario extends javax.swing.JFrame {
     private void jBtnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaActionPerformed
         // TODO add your handling code here:
         listarTabelaCliente();
+        jTableClientes.clearSelection();
+        jLabelSaldoDisp.setText("");
+        jPanelBtnAcaoCliente.setVisible(false);
     }//GEN-LAST:event_jBtnConsultaActionPerformed
 
     private void jBtnNvClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnNvClienteMouseClicked
@@ -4036,7 +4090,7 @@ public class AreaUsuario extends javax.swing.JFrame {
         cl.show(jPanel2, "TelaAlterar");
     }//GEN-LAST:event_jBtnAlterarMouseClicked
 
-    private void jBtnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnApagarActionPerformed
+    private void jBtnTornarInativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnTornarInativoActionPerformed
         // TODO add your handling code here:
 
         try{
@@ -4044,15 +4098,16 @@ public class AreaUsuario extends javax.swing.JFrame {
             String nome = (String) jTableFuncionario.getModel().getValueAt(jTableFuncionario.getSelectedRow(), 0);
             Vendedor vendedor = new Vendedor();
             vendedor.setNome(nome);
-            usDAO.excluirUsuario(vendedor);
-            JOptionPane.showMessageDialog(this, "Funcionário excluido com sucesso!", "Aviso!", 1);
+            usDAO.tornarInativo(vendedor);
+            JOptionPane.showMessageDialog(this, "Funcionário Temporáriamente Indisponível!", "Aviso!", 1);
             listarTabelaFuncionario();
+            jPanelBtns.setVisible(false);
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(this, "Impossível excluir um funcionário não existente","Alerta!",1);
             
         }
-    }//GEN-LAST:event_jBtnApagarActionPerformed
+    }//GEN-LAST:event_jBtnTornarInativoActionPerformed
 
     private void jBtnCadastroGerenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastroGerenciaActionPerformed
         // TODO add your handling code here:
@@ -4066,7 +4121,8 @@ public class AreaUsuario extends javax.swing.JFrame {
             String usuario = jLabelUsuarioPerfil.getText();
             String acao = "finalizar o cadastro de um novo vendedor.";
             Senha s = new Senha();
-            s.setLabel(acao, nome, usuario);
+            String opc = "01";
+            s.setLabel(acao, nome, usuario, opc);
             s.getDadosVendedor(nm_vendedor, nm_usuario, senha);
             s.show();
             s.setLocationRelativeTo(null);
@@ -4149,8 +4205,9 @@ public class AreaUsuario extends javax.swing.JFrame {
             String endereco_cliente = jTxtEnderecoCadCliente.getText();
      
             double limiteCliente = setValorDouble(jFormattedValorCadCliente.getText());
+            String opc = "02";
             Senha s = new Senha();
-            s.setLabel(acao, nome, usuario);
+            s.setLabel(acao, nome, usuario, opc);
             s.getDadosClientes(nm_cliente, endereco_cliente, telefone_cliente, limiteCliente, nome);
             s.show();
             s.setLocationRelativeTo(null);
@@ -4188,8 +4245,9 @@ public class AreaUsuario extends javax.swing.JFrame {
                 String numeroA = numero.replace(".", "");
                 String numeroB = numeroA.replace(",", ".");
                 double limite_cliente = Double.parseDouble(numeroB);
+                String opc = "02";
                 Senha s = new Senha();
-                s.setLabel(acao, nome, usuario);
+                s.setLabel(acao, nome, usuario, opc);
                 s.getDadosClientes(nm_cliente, endereco_cliente, telefone_cliente, limite_cliente, nome);
                 s.show();
                 s.setLocationRelativeTo(null);
@@ -4306,6 +4364,7 @@ public class AreaUsuario extends javax.swing.JFrame {
         jLabelUsuarioFuncionario.setText(vendedor.get(i).getUsuario());
         jLabelCargoFuncionario.setText(cargoVendedor);
         jLabelSenhaFuncionario.setText(vendedor.get(i).getSenha());
+        jLabelStatusColaborador.setText(vendedor.get(i).getSituaçao());
         
         if(jLabelCargoPerfil.getText().equals("Administrador") || nmVendedor.equals(jLabelNomePerfil.getText())){
             jPanelPromover.setVisible(false);
@@ -4363,9 +4422,9 @@ public class AreaUsuario extends javax.swing.JFrame {
             String nome_func = jLabelNomeFuncionario.getText() ;
             String nm_cargo = cargo;
             String acao = "promover o funcionário.";
-            
+            String opc = "03";
             Senha s = new Senha();
-            s.setLabel(acao, nome, nm_usuario);
+            s.setLabel(acao, nome, nm_usuario, opc);
             s.getInfoFuncionario(nome_func, nm_cargo);
             s.show();
             s.setLocationRelativeTo(null);
@@ -4392,10 +4451,18 @@ public class AreaUsuario extends javax.swing.JFrame {
     private void jBtnGerenciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGerenciarActionPerformed
         // TODO add your handling code here:
         listarTabelaFuncionario();
+        jTableFuncionario.clearSelection();
+        jPanelBtns.setVisible(false);
     }//GEN-LAST:event_jBtnGerenciarActionPerformed
 
     private void jTableFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableFuncionarioMouseClicked
         // TODO add your handling code here:String nomePerfil = jLabelNomePerfil.getText();
+        UsuarioDAO usDAO = new UsuarioDAO();
+        Vendedor vendedores = new Vendedor();
+        vendedores.setNome((String)jTableFuncionario.getModel().getValueAt(jTableFuncionario.getSelectedRow(), 0));
+        List<Vendedor> vendedor = usDAO.getSituaçao(vendedores);
+        int i = 0;
+        String situaçao = vendedor.get(i).getSituaçao();
         if(jTableFuncionario.getSelectedRowCount()> 0){
             jPanelBtns.setVisible(true);            
         }
@@ -4403,7 +4470,7 @@ public class AreaUsuario extends javax.swing.JFrame {
             
         String nomePerfil = jLabelNomePerfil.getText();
         String nomeTabela = (String) jTableFuncionario.getModel().getValueAt(jTableFuncionario.getSelectedRow(), 0);
-        if(nomePerfil.equals(nomeTabela) || jLabelCargoPerfil.getText().equals("Administrador")){
+        if(nomePerfil.equals(nomeTabela) || jLabelCargoPerfil.getText().equals("Administrador") || situaçao.equals("Inativo")){
             jPanelPromover.setVisible(false);
             jPanelBtnApagar.setVisible(false);
         }else{
@@ -4465,11 +4532,12 @@ public class AreaUsuario extends javax.swing.JFrame {
             
             
             if(valorCompra <= valor_limite){
+                String opc = "04";
                 Senha s = new Senha();
                 String acao = "finalizar a compra do cliente";
                 String nome_user = jLabelNomeUsuario.getText();
                 String usuario = jLabelUsuarioPerfil.getText();
-                s.setLabel(acao, nome_user, usuario);
+                s.setLabel(acao, nome_user, usuario, opc);
                 String dt_compra = setDt(jFormattedTxtDataCompra.getText());  // ALTERAÇÃO FULL
                 String descrição = jTextPanelDescriçaoCompra.getText();
                 String nome_cliente = jLabelNomeDetalhes.getText();
@@ -4496,12 +4564,29 @@ public class AreaUsuario extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
         CardLayout cl = (CardLayout) jPanel2.getLayout();
         cl.show(jPanel2, "TelaAlterarFun");
-        jTxtNomeFunEditar.setText(jLabelNomeFuncionario.getText());
-        jTxtNomeFunEditar.setEditable(false);
-        jTxtNmUsuarioEditar.setText(jLabelUsuarioFuncionario.getText());
-        jPassSenhaFuncEditar.setText(jLabelSenhaFuncionario.getText());
+        if(jLabelStatusColaborador.getText().equals("Inativo")){
+            jPanelSituaçaoFuncionario.setVisible(true);
+            jTxtNomeFunEditar.setText(jLabelNomeFuncionario.getText());
+            jTxtNomeFunEditar.setEditable(false);
+            jTxtNmUsuarioEditar.setText(jLabelUsuarioFuncionario.getText());
+            jTxtNmUsuarioEditar.setEditable(false);
+            jPassSenhaFuncEditar.setText(jLabelSenhaFuncionario.getText());
+            jPassSenhaFuncEditar.setEditable(false);
+        }else{
+            jPanelSituaçaoFuncionario.setVisible(false);
+            jTxtNomeFunEditar.setText(jLabelNomeFuncionario.getText());
+            jTxtNomeFunEditar.setEditable(false);
+            jTxtNmUsuarioEditar.setText(jLabelUsuarioFuncionario.getText());
+            jTxtNmUsuarioEditar.setEditable(true);
+            jPassSenhaFuncEditar.setText(jLabelSenhaFuncionario.getText());
+            jPassSenhaFuncEditar.setEditable(true);
+            
+        }
+ 
+        
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -4518,21 +4603,26 @@ public class AreaUsuario extends javax.swing.JFrame {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-        String saldo = jLabelSaldoDisp.getText();
-        String saldoA = saldo.replace(".", ",");
+        //String saldo = jLabelSaldoDisp.getText();
+        //String saldoA = saldo.replace(".", ",");
+        ClienteDAO clDAO = new ClienteDAO();
+        int i = 0;
         
         String situaçao = (String) jTableClientes.getModel().getValueAt(jTableClientes.getSelectedRow(), 3);
         String nome = (String) jTableClientes.getModel().getValueAt(jTableClientes.getSelectedRow(), 0);
         String telefone = (String) jTableClientes.getModel().getValueAt(jTableClientes.getSelectedRow(), 1);
         String endereco = (String) jTableClientes.getModel().getValueAt(jTableClientes.getSelectedRow(), 2);
+        List<Clientes> cliente = clDAO.getLimite(nome, telefone);
+        String saldo = String.valueOf(cliente.get(i).getLimite());
+        String saldoA = saldo.replace(".", ",");
         jTxtNomeAlterar.setText(nome);
         jFormattedTxtTelefone.setText(telefone);
         jTxtEnderecoAlterarClientes.setText(endereco);
-        jFormattedAlterarDados.setText(saldoA);
+        jFormattedAlterarDados.setText(String.valueOf(saldoA));
         
         if(situaçao.equals("Ativo")){
             jPanelMostrarSituação.setVisible(false);
-            jTxtNomeAlterar.setEditable(true);
+            jTxtNomeAlterar.setEditable(false);
             jFormattedTxtTelefone.setEditable(true);
             jTxtEnderecoAlterarClientes.setEditable(true);
             jFormattedAlterarDados.setEditable(true);
@@ -4544,6 +4634,11 @@ public class AreaUsuario extends javax.swing.JFrame {
             jTxtEnderecoAlterarClientes.setEditable(false);
             jFormattedAlterarDados.setEditable(false);
             jPanelBtnSalvar.setVisible(false);
+        }
+        
+        if(jLabelCargoUsuario.getText().equals("Funcionário")){
+            jFormattedAlterarDados.setEditable(false);
+            jTxtNomeAlterar.setEditable(false);
         }
         
         
@@ -4563,8 +4658,9 @@ public class AreaUsuario extends javax.swing.JFrame {
         
         double limite = setValorDouble(jFormattedAlterarDados.getText());  // ALTERAÇÃO FULL
         
+        String opc = "05";
         Senha s = new Senha();
-        s.setLabel(açao, vendedor, nm_user);
+        s.setLabel(açao, vendedor, nm_user, opc);
         s.getDadosClientes(nome, endereco, telefone, limite);
         s.show();
         s.setLocationRelativeTo(null);
@@ -4648,8 +4744,13 @@ public class AreaUsuario extends javax.swing.JFrame {
 
     private void jTableComprasClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableComprasClienteMouseClicked
         // TODO add your handling code here:
+        if(jTableComprasCliente.getModel().getRowCount() > 0){
+            jPanelBtnVerDetalhes.setVisible(true);
+        }else{
+            jPanelBtnVerDetalhes.setVisible(false);
+        }
         
-        jPanelBtnVerDetalhes.setVisible(true);
+        
     }//GEN-LAST:event_jTableComprasClienteMouseClicked
 
     private void jBtnReceberTudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnReceberTudoActionPerformed
@@ -4672,9 +4773,9 @@ public class AreaUsuario extends javax.swing.JFrame {
             double limiteFinal = setValorDouble(limiteAtual);  //ALTERAÇÃO FULL
             valorLimite = limiteFinal;
             int idCompra = Integer.valueOf(jTxtIDCompra.getText()); 
-         
+            String opc = "06";
             Senha s = new Senha();
-            s.setLabel(acao, vendedor, nm_user);
+            s.setLabel(acao, vendedor, nm_user, opc);
             s.getDadosCompra(nm_cliente, telefone_cliente, dtCompra, valorCompra, descricao, valorCompra, vendedor, limiteFinal, dtPagamento, idCompra);
             s.show();
             s.setLocationRelativeTo(null);
@@ -4735,17 +4836,19 @@ public class AreaUsuario extends javax.swing.JFrame {
             if(valorReceber > valorCompra){
                 JOptionPane.showMessageDialog(this, "Impossível Efetuar o Acordo, Verifique o Valor e Tente Novamente!");
             }else if (valorReceber == valorCompra){
+                String opc = "06";
                 acao = "finalizar o recebimento da compra.";
                 valorLimite = limiteAtual;
                 Senha s = new Senha();
-                s.setLabel(acao, vendedor, nm_user);
+                s.setLabel(acao, vendedor, nm_user, opc);
                 s.getDadosCompras(nmCliente, telefoneCliente, dtCompra, valorCompra, valorReceber, compraAtual, descricao, vendedor, limiteAtual , dtRecibo, idCompra);
                 s.setLocationRelativeTo(null);
                 s.show();
            }else{
+                String opc1 = "09";
                 valorLimite = limiteAtual;
                 Senha s = new Senha();
-                s.setLabel(acao, vendedor, nm_user);
+                s.setLabel(acao, vendedor, nm_user, opc1);
                 s.getDadosCompras(nmCliente, telefoneCliente, dtCompra, valorCompra, valorReceber, compraAtual, descricao, vendedor, limiteAtual , dtRecibo, idCompra);
                 s.setLocationRelativeTo(null);
                 s.show();
@@ -4770,9 +4873,9 @@ public class AreaUsuario extends javax.swing.JFrame {
             String nmUser = jLabelUsuarioPerfil.getText();
             String nmCliente = jLabelNomeDetalhes.getText();
             String telefoneCliente = jLabelTelefoneDetalhesCliente.getText();
-            
+            String opc = "07";
             Senha s = new Senha();
-            s.setLabel(acao, nmVendedor, nmUser);
+            s.setLabel(acao, nmVendedor, nmUser, opc);
             s.getDadosClientePk(nmCliente, telefoneCliente);
             s.setLocationRelativeTo(null);
             s.show();
@@ -4797,9 +4900,9 @@ public class AreaUsuario extends javax.swing.JFrame {
             String nmUser = jLabelUsuarioPerfil.getText();
             String nmCliente = jTxtNomeAlterar.getText();
             String telefoneCliente = jFormattedTxtTelefone.getText();
-            
+            String opc = "08";
             Senha s = new Senha();
-            s.setLabel(acao, nmVendedor, nmUser);
+            s.setLabel(acao, nmVendedor, nmUser, opc);
             s.getDadosClientePk(nmCliente,telefoneCliente);
             s.setLocationRelativeTo(null);
             s.show();
@@ -5069,9 +5172,9 @@ public class AreaUsuario extends javax.swing.JFrame {
         String nm_userFun = jTxtNmUsuarioEditar.getText();
         char[] pass = jPassSenhaFuncEditar.getPassword();
         String senha = String.valueOf(pass);
-        
+        String opc = "10";
         Senha s = new Senha();
-        s.setLabel(açao, nome, nm_user);
+        s.setLabel(açao, nome, nm_user, opc);
         s.getDadosVendedor(nm_fun, nm_userFun, senha);
         s.setLocationRelativeTo(null);
         s.show();
@@ -5126,15 +5229,17 @@ public class AreaUsuario extends javax.swing.JFrame {
                     }else if (valorReceber == valorCompra){
                         acao = "finalizar o recebimento da compra.";
                         valorLimite = limiteAtual;
+                        String opc = "06";
                         Senha s = new Senha();
-                        s.setLabel(acao, vendedor, nm_user);
+                        s.setLabel(acao, vendedor, nm_user, opc);
                         s.getDadosCompras(nmCliente, telefoneCliente, dtCompra, valorCompra, valorReceber, compraAtual, descricao, vendedor, limiteAtual , dtRecibo, idCompra);
                         s.setLocationRelativeTo(null);
                         s.show();
                     }else{
+                        String opc1 = "09";
                         valorLimite = limiteAtual;
                         Senha s = new Senha();
-                        s.setLabel(acao, vendedor, nm_user);
+                        s.setLabel(acao, vendedor, nm_user, opc1);
                         s.getDadosCompras(nmCliente, telefoneCliente, dtCompra, valorCompra, valorReceber, compraAtual, descricao, vendedor, limiteAtual , dtRecibo, idCompra);
                         s.setLocationRelativeTo(null);
                         s.show();
@@ -5156,9 +5261,9 @@ public class AreaUsuario extends javax.swing.JFrame {
                 double limiteFinal = setValorDouble(limiteAtual);  //ALTERAÇÃO FULL
                 valorLimite = limiteFinal;
                 int idCompra = Integer.valueOf(jTxtIDCompra.getText()); 
-
+                String opc2 = "06";
                 Senha s = new Senha();
-                s.setLabel(acao, vendedor, nm_user);
+                s.setLabel(acao, vendedor, nm_user, opc2);
                 s.getDadosCompra(nm_cliente, telefone_cliente, dtCompra, valorCompra, descricao, valorCompra, vendedor, limiteFinal, dtPagamento, idCompra);
                 s.show();
                 s.setLocationRelativeTo(null);
@@ -5193,18 +5298,19 @@ public class AreaUsuario extends javax.swing.JFrame {
                     if(valorReceber > valorCompra){
                         JOptionPane.showMessageDialog(this, "Impossível Efetuar o Acordo, Verifique o Valor e Tente Novamente!");
                     }else if (valorReceber == valorCompra){
-                        
+                        String opc = "06";
                         acao = "finalizar o recebimento da compra.";
                         valorLimite = limiteAtual;
                         Senha s = new Senha();
-                        s.setLabel(acao, vendedor, nm_user);
+                        s.setLabel(acao, vendedor, nm_user, opc);
                         s.getDadosCompras(nmCliente, telefoneCliente, dtCompra, valorCompra, valorReceber, compraAtual, descricao, vendedor, limiteAtual , dtRecibo, idCompra);
                         s.setLocationRelativeTo(null);
                         s.show();
                     }else{
+                        String opc1 = "09";
                         valorLimite = limiteAtual;
                         Senha s = new Senha();
-                        s.setLabel(acao, vendedor, nm_user);
+                        s.setLabel(acao, vendedor, nm_user, opc1);
                         s.getDadosCompras(nmCliente, telefoneCliente, dtCompra, valorCompra, valorReceber, compraAtual, descricao, vendedor, limiteAtual , dtRecibo, idCompra);
                         s.setLocationRelativeTo(null);
                         s.show();
@@ -5245,9 +5351,9 @@ public class AreaUsuario extends javax.swing.JFrame {
             String endereco = jTxtEnderecoAlterarClientes.getText();
         
             double limite = setValorDouble(jFormattedAlterarDados.getText());  // ALTERAÇÃO FULL
-        
+            String opc = "05";
             Senha s = new Senha();
-            s.setLabel(açao, vendedor, nm_user);
+            s.setLabel(açao, vendedor, nm_user, opc);
             s.getDadosClientes(nome, endereco, telefone, limite);
             s.show();
             s.setLocationRelativeTo(null);
@@ -5266,9 +5372,9 @@ public class AreaUsuario extends javax.swing.JFrame {
             String endereco = jTxtEnderecoAlterarClientes.getText();
         
             double limite = setValorDouble(jFormattedAlterarDados.getText());  // ALTERAÇÃO FULL
-        
+            String opc = "05";
             Senha s = new Senha();
-            s.setLabel(açao, vendedor, nm_user);
+            s.setLabel(açao, vendedor, nm_user, opc);
             s.getDadosClientes(nome, endereco, telefone, limite);
             s.show();
             s.setLocationRelativeTo(null);
@@ -5286,9 +5392,9 @@ public class AreaUsuario extends javax.swing.JFrame {
             String endereco = jTxtEnderecoAlterarClientes.getText();
         
             double limite = setValorDouble(jFormattedAlterarDados.getText());  // ALTERAÇÃO FULL
-        
+            String opc = "05";
             Senha s = new Senha();
-            s.setLabel(açao, vendedor, nm_user);
+            s.setLabel(açao, vendedor, nm_user, opc);
             s.getDadosClientes(nome, endereco, telefone, limite);
             s.show();
             s.setLocationRelativeTo(null);
@@ -5306,9 +5412,9 @@ public class AreaUsuario extends javax.swing.JFrame {
             String endereco = jTxtEnderecoAlterarClientes.getText();
         
             double limite = setValorDouble(jFormattedAlterarDados.getText());  // ALTERAÇÃO FULL
-        
+            String opc = "05";
             Senha s = new Senha();
-            s.setLabel(açao, vendedor, nm_user);
+            s.setLabel(açao, vendedor, nm_user, opc);
             s.getDadosClientes(nome, endereco, telefone, limite);
             s.show();
             s.setLocationRelativeTo(null);
@@ -5328,7 +5434,8 @@ public class AreaUsuario extends javax.swing.JFrame {
                 String usuario = jLabelUsuarioPerfil.getText();
                 String acao = "finalizar o cadastro de um novo vendedor.";
                 Senha s = new Senha();
-                s.setLabel(acao, nome, usuario);
+                String opc = "01";
+                s.setLabel(acao, nome, usuario, opc);
                 s.getDadosVendedor(nm_vendedor, nm_usuario, senha);
                 s.show();
                 s.setLocationRelativeTo(null);
@@ -5358,7 +5465,8 @@ public class AreaUsuario extends javax.swing.JFrame {
                     String acao = "finalizar a compra do cliente";
                     String nome_user = jLabelNomeUsuario.getText();
                     String usuario = jLabelUsuarioPerfil.getText();
-                    s.setLabel(acao, nome_user, usuario);
+                    String opc = "04";
+                    s.setLabel(acao, nome_user, usuario, opc);
                     String dt_compra = setDt(jFormattedTxtDataCompra.getText());  // ALTERAÇÃO FULL
                     String descrição = jTextPanelDescriçaoCompra.getText();
                     String nome_cliente = jLabelNomeDetalhes.getText();
@@ -5385,9 +5493,9 @@ public class AreaUsuario extends javax.swing.JFrame {
             String nm_userFun = jTxtNmUsuarioEditar.getText();
             char[] pass = jPassSenhaFuncEditar.getPassword();
             String senha = String.valueOf(pass);
-        
+            String opc = "10";
             Senha s = new Senha();
-            s.setLabel(açao, nome, nm_user);
+            s.setLabel(açao, nome, nm_user, opc);
             s.getDadosVendedor(nm_fun, nm_userFun, senha);
             s.setLocationRelativeTo(null);
             s.show();
@@ -5405,9 +5513,9 @@ public class AreaUsuario extends javax.swing.JFrame {
             String nm_userFun = jTxtNmUsuarioEditar.getText();
             char[] pass = jPassSenhaFuncEditar.getPassword();
             String senha = String.valueOf(pass);
-        
+            String opc = "10";
             Senha s = new Senha();
-            s.setLabel(açao, nome, nm_user);
+            s.setLabel(açao, nome, nm_user, opc);
             s.getDadosVendedor(nm_fun, nm_userFun, senha);
             s.setLocationRelativeTo(null);
             s.show();
@@ -5425,14 +5533,30 @@ public class AreaUsuario extends javax.swing.JFrame {
             String nm_userFun = jTxtNmUsuarioEditar.getText();
             char[] pass = jPassSenhaFuncEditar.getPassword();
             String senha = String.valueOf(pass);
-        
+            String opc = "10";
             Senha s = new Senha();
-            s.setLabel(açao, nome, nm_user);
+            s.setLabel(açao, nome, nm_user, opc);
             s.getDadosVendedor(nm_fun, nm_userFun, senha);
             s.setLocationRelativeTo(null);
             s.show();
         }
     }//GEN-LAST:event_jTxtNomeFunEditarKeyPressed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if(jCheckAtivarFun.isSelected()){
+            Vendedor vendedor = new Vendedor();
+            vendedor.setNome(jTxtNomeFunEditar.getText());
+            UsuarioDAO usDAO = new UsuarioDAO();
+            usDAO.tornarAtivo(vendedor);
+            JOptionPane.showMessageDialog(this, "Funcionário Ativo Com Sucesso!", "Alerta!",1);
+            CardLayout cl = (CardLayout) jPanel2.getLayout();
+            cl.show(jPanel2, "TelaHome");
+            
+        }else{
+            JOptionPane.showMessageDialog(this,"Marque a Caixa de Seleção Antes de Prosseguir!", "Atenção", 1);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -5476,7 +5600,6 @@ public class AreaUsuario extends javax.swing.JFrame {
     private javax.swing.JButton jBtnAdicionarCompras;
     private javax.swing.JButton jBtnAlterar;
     private javax.swing.JButton jBtnAlterarFun;
-    private javax.swing.JButton jBtnApagar;
     private javax.swing.JButton jBtnAtivar;
     private javax.swing.JButton jBtnCadastrarCliente;
     private javax.swing.JButton jBtnCadastroGerencia;
@@ -5498,6 +5621,7 @@ public class AreaUsuario extends javax.swing.JFrame {
     private javax.swing.JButton jBtnRelatorioPg;
     private javax.swing.JButton jBtnRelatorioVenda;
     private javax.swing.JButton jBtnSalvarDadosAlterados;
+    private javax.swing.JButton jBtnTornarInativo;
     private javax.swing.JButton jBtnVerDetalhes;
     private javax.swing.JButton jBtnVerDetalhesCompras;
     private javax.swing.JButton jBtnVerDetalhesFuncionario;
@@ -5511,8 +5635,10 @@ public class AreaUsuario extends javax.swing.JFrame {
     private javax.swing.JButton jBtnVoltarRelatorio1;
     private javax.swing.JButton jBtnVoltarTelaFuncionario;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckAtivarCliente;
+    private javax.swing.JCheckBox jCheckAtivarFun;
     private javax.swing.JCheckBox jCheckMostrarSenha;
     private javax.swing.JCheckBox jCheckSenha;
     private javax.swing.JCheckBox jCheckSenhaColaborador;
@@ -5602,6 +5728,7 @@ public class AreaUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel66;
     private javax.swing.JLabel jLabel67;
@@ -5658,6 +5785,7 @@ public class AreaUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSenhaFuncionario;
     private javax.swing.JLabel jLabelSenhaUsuario;
     private javax.swing.JLabel jLabelStatusCliente;
+    private javax.swing.JLabel jLabelStatusColaborador;
     private javax.swing.JLabel jLabelTelefoneDetalhesCliente;
     private javax.swing.JLabel jLabelTituloRelatorio;
     private javax.swing.JLabel jLabelUsuarioFuncionario;
@@ -5726,6 +5854,7 @@ public class AreaUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelRelatorioTables;
     private javax.swing.JPanel jPanelRelatorios;
     private javax.swing.JPanel jPanelSenha;
+    private javax.swing.JPanel jPanelSituaçaoFuncionario;
     private javax.swing.JPanel jPanelTablePg;
     private javax.swing.JPanel jPanelTableVendas;
     private javax.swing.JPanel jPanelValorAreceber;
