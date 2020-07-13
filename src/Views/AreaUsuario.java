@@ -49,6 +49,17 @@ public class AreaUsuario extends javax.swing.JFrame {
         
     }
     
+    public String[] primeiroNome(String nome){
+        int i = 0;
+        for(int j = 0; j<nome.length(); j++){
+            if(nome.substring(j).equals(" ")){
+                i++;
+            }
+        }
+        String array[] = new String[i];
+        array = nome.split(" ");
+        return array;
+    }
     
     public double setValorDouble(String valor){
         String valorA = valor.replace(".", "");
@@ -2662,7 +2673,6 @@ public class AreaUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel15Layout.createSequentialGroup()
                                 .addComponent(jLabel52)
@@ -4020,7 +4030,7 @@ public class AreaUsuario extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addGroup(jPanelRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelRelatoriosLayout.createSequentialGroup()
-                        .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                        .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, 528, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanelRelatoriosLayout.createSequentialGroup()
                         .addGroup(jPanelRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4058,6 +4068,7 @@ public class AreaUsuario extends javax.swing.JFrame {
         jTableClientes.clearSelection();
         jLabelSaldoDisp.setText("");
         jPanelBtnAcaoCliente.setVisible(false);
+        jTxtFiltro.setText("");
     }//GEN-LAST:event_jBtnConsultaActionPerformed
 
     private void jBtnNvClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnNvClienteMouseClicked
@@ -4487,7 +4498,7 @@ public class AreaUsuario extends javax.swing.JFrame {
         String situaçao = jLabelStatusCliente.getText();
         if(valor > 0){
             if(situaçao.equals("Ativo")){
-                jLabel72.setText(jLabelNomeDetalhes.getText());
+                jLabel72.setText(primeiroNome(jLabelNomeDetalhes.getText())[0]);
                 jLabelNomeVendedor.setText(jLabelNomePerfil.getText());
                 CardLayout cl = (CardLayout) jPanel2.getLayout();
                 cl.show(jPanel2, "TelaAdd");
@@ -4506,7 +4517,7 @@ public class AreaUsuario extends javax.swing.JFrame {
         cl.show(jPanel2, "TelaDetalhes");
         jLabelSaldoDisp.setText("");
         jFormattedTxtDataCompra.setText("");
-        jFormattedTxtValorCompra.setText("");
+        jFormattedTxtValorCompra.setText("00");
         jTextPanelDescriçaoCompra.setText("");
         jTableClientes.clearSelection();
         listarTabelaCompra(jLabelNomeDetalhes.getText(), jLabelTelefoneDetalhesCliente.getText());
@@ -4686,7 +4697,7 @@ public class AreaUsuario extends javax.swing.JFrame {
         valorLimite = Double.valueOf(jLabelLimiteDisponivelDetalhesClientes.getText());
         CardLayout cl = (CardLayout) jPanel2.getLayout();
         cl.show(jPanel2, "DetalhesCompra");
-        jLabelNomeCliente.setText(jLabelNomeDetalhes.getText());
+        jLabelNomeCliente.setText(primeiroNome(jLabelNomeDetalhes.getText())[0]);
         
         if(jTableComprasCliente.getModel().getValueAt(jTableComprasCliente.getSelectedRow(), 4).equals("PAGO")){
             jPanelMetodoPg.setVisible(false);
