@@ -12,12 +12,15 @@ import java.awt.CardLayout;
 import Views.Senha;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Color;
+import java.awt.Component;
 import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.NumberFormatter;
@@ -48,6 +51,27 @@ public class AreaUsuario extends javax.swing.JFrame {
         }
         
     }
+    public void setColor(){
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer(){
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
+            Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            
+            String str = (String) value;
+            if("PENDENTE".equals(value)){
+                c.setForeground(Color.red);
+            }else{
+                c.setForeground(Color.green);
+            }
+            return c;
+        }
+        
+        };
+        jTableComprasCliente.getColumnModel().getColumn(4).setCellRenderer(renderer);
+    }
+            
+        
+            
+            
     
     public String[] primeiroNome(String nome){
         int i = 0;
@@ -4298,7 +4322,7 @@ public class AreaUsuario extends javax.swing.JFrame {
         String telefone = (String) jTableClientes.getModel().getValueAt(jTableClientes.getSelectedRow(), 1) ;
         
         listarTabelaCompra(nome, telefone);
-        
+        setColor();
         ClienteDAO clDAO = new ClienteDAO();
         Clientes cliente = new Clientes();
         cliente.setNome(nome);
