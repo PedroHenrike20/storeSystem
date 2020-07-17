@@ -22,10 +22,22 @@ public class UsuarioDAO {
     }
     
     //SALVANDO USUARIOS
-    public void salvarUsuarios(Vendedor vendedor){
-    
-        String sql = "INSERT INTO tb_vendedor(nm_vendedor, nm_usuario, senha_usuario, cargo_vendedor, situaçao_vendedor)"
+    public void salvarUsuarios(Vendedor vendedor, String opc){
+        
+        String sql = "";
+        
+        String sql1 = "INSERT INTO tb_vendedor(nm_vendedor, nm_usuario, senha_usuario, cargo_vendedor, situaçao_vendedor)"
             + "VALUES(?,?,?,'Funcionário', 'Ativo')";
+        
+        String sql2 = "INSERT INTO tb_vendedor(nm_vendedor, nm_usuario, senha_usuario, cargo_vendedor, situaçao_vendedor)"
+            + "VALUES(?,?,?,'Gerente', 'Ativo')";
+        
+        if(opc.equals("01")){
+            sql = sql1;
+        }else{
+            sql = sql2;
+        }
+        
     
         try{
             PreparedStatement stmt = conecta.prepareStatement(sql);

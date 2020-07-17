@@ -380,7 +380,7 @@ public class Senha extends javax.swing.JFrame {
                     vendedor.setNome(nome_geral);
                     vendedor.setUsuario(nome_usuario);
                     vendedor.setSenha(senha_usuario);
-                    usDAO.salvarUsuarios(vendedor);
+                    usDAO.salvarUsuarios(vendedor, "01");
                     JOptionPane.showMessageDialog(this, "Usuário Cadastrado Com Sucesso!", "Atenção!",1);
                     limparVariaveis();
                     this.dispose();
@@ -588,7 +588,7 @@ public class Senha extends javax.swing.JFrame {
                         vendedor.setNome(nome_geral);
                         vendedor.setUsuario(nome_usuario);
                         vendedor.setSenha(senha_usuario);
-                        usDAO.salvarUsuarios(vendedor);
+                        usDAO.salvarUsuarios(vendedor, "01");
                         JOptionPane.showMessageDialog(this, "Usuário Cadastrado Com Sucesso!", "Atenção!",1);
                         limparVariaveis();
                         this.dispose();
