@@ -67,6 +67,8 @@ public class AreaUsuario extends javax.swing.JFrame {
         
         };
         jTableComprasCliente.getColumnModel().getColumn(4).setCellRenderer(renderer);
+        jTableRelatorioVendas.getColumnModel().getColumn(5).setCellRenderer(renderer);
+        
     }
             
         
@@ -4355,6 +4357,7 @@ public class AreaUsuario extends javax.swing.JFrame {
 
     private void jBtnVoltarDetalhesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVoltarDetalhesActionPerformed
         // TODO add your handling code here:
+        jTableComprasCliente.clearSelection();
         CardLayout cl = (CardLayout) jPanel2.getLayout();
         cl.show(jPanel2, "TelaConsulta");
         jTableClientes.clearSelection();
@@ -4367,6 +4370,9 @@ public class AreaUsuario extends javax.swing.JFrame {
         ClienteDAO clDAO = new ClienteDAO();
         List<Clientes> clientes = null;
         clientes = clDAO.pesquisaCliente(jTxtFiltro.getText());
+        if(clientes.size()== 0){
+            JOptionPane.showMessageDialog(this, "Nenhuma Informação Foi Encontrada, Tente Novamente!", "Alerta!", 1);
+        }
         
         DefaultTableModel valor = (DefaultTableModel) jTableClientes.getModel();
         valor.getDataVector().removeAllElements();
@@ -4790,7 +4796,7 @@ public class AreaUsuario extends javax.swing.JFrame {
 
     private void jBtnReceberTudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnReceberTudoActionPerformed
         // TODO add your handling code here:
-        if(jFormattedTxtDtRecibo.getText().equals("")){
+        if(jFormattedTxtDtRecibo.getText().equals("          /        /      ")){
             JOptionPane.showMessageDialog(this, "Digite o campo antes de prosseguir!","Alerta!",1);
         }else{
             String dtCompra = setDt(jFormattedTxtDtVenda.getText());  //ALTERAÇÃO FULL
@@ -4840,7 +4846,7 @@ public class AreaUsuario extends javax.swing.JFrame {
             jPanelFazerAcordo.setVisible(false);
             jPanelValorAreceber.setVisible(false);
             jTtxtDescricaoDetalhes.setEditable(false);
-            Color c = new Color(153,153,153);
+            Color c = new Color(204,204,204);
             jPanelDescricao.setBackground(c);
         }
     }//GEN-LAST:event_jRadioAVistaActionPerformed
@@ -4959,6 +4965,7 @@ public class AreaUsuario extends javax.swing.JFrame {
         jPanelRelatorioInfo.setVisible(false);
         CardLayout cl = (CardLayout) jPanel2.getLayout();
         cl.show(jPanel2, "TelaRelatórios");
+        setColor();
     }//GEN-LAST:event_jBtnRelatorioVendaActionPerformed
 
     private void jBtnRelatorioPgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRelatorioPgActionPerformed
@@ -5098,14 +5105,23 @@ public class AreaUsuario extends javax.swing.JFrame {
             List<Compras> compras = null;
             if(jRadioBtnNmCliente.isSelected()){
                 compras = vnDAO.pesquisaCompras(1, jTextNomePesquisa.getText());
+                if(compras.size()== 0){
+                    JOptionPane.showMessageDialog(this, "Nenhuma Informação Foi Encontrada, Tente Novamente!", "Alerta!", 1);
+                }
                
             }else if(jRadioBtnComprasPendentes.isSelected()){
                 compras = vnDAO.pesquisaPendente();
+                if(compras.size()== 0){
+                    JOptionPane.showMessageDialog(this, "Nenhuma Informação Foi Encontrada, Tente Novamente!", "Alerta!", 1);
+                }
                               
             }else{
                 String dtCompra = jFormattedTxtDt.getText();
                 String data = dtCompra.replace(" ", "");
                 compras = vnDAO.pesquisaCompras(3, data);
+                if(compras.size()== 0){
+                    JOptionPane.showMessageDialog(this, "Nenhuma Informação Foi Encontrada, Tente Novamente!", "Alerta!", 1);
+                }
             }
             DefaultTableModel valor = (DefaultTableModel) jTableRelatorioVendas.getModel();
             valor.getDataVector().removeAllElements();
@@ -5120,12 +5136,17 @@ public class AreaUsuario extends javax.swing.JFrame {
             List<Pagamentos> pagamentos = null;
             if(jRadioBtnNmCliente.isSelected()){
                 pagamentos = pgDAO.pesquisarPagamentos(1, jTextNomePesquisa.getText());
+                if(pagamentos.size()== 0){
+                    JOptionPane.showMessageDialog(this, "Nenhuma Informação Foi Encontrada, Tente Novamente!", "Alerta!", 1);
+                }
 
             }else{
                 String dt_Compra = jFormattedTxtDt.getText();
                 String dt = dt_Compra.replace(" ", "");
                 pagamentos = pgDAO.pesquisarPagamentos(2, dt);
-                
+                if(pagamentos.size()== 0){
+                    JOptionPane.showMessageDialog(this, "Nenhuma Informação Foi Encontrada, Tente Novamente!", "Alerta!", 1);
+                }
             }
             DefaultTableModel valores = (DefaultTableModel) jTableRelatorioPagamento.getModel();
                 
@@ -5142,58 +5163,131 @@ public class AreaUsuario extends javax.swing.JFrame {
 
     private void jTextNomePesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNomePesquisaKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            if(jLabelTituloRelatorio.getText().equals("vendas")){
-            VendaDAO vnDAO = new VendaDAO();
-            List<Compras> compras = null;
-            if(jRadioBtnNmCliente.isSelected()){
-                compras = vnDAO.pesquisaCompras(1, jTextNomePesquisa.getText());
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){    
+            String tabela = jLabelTituloRelatorio.getText();
+            if(tabela.equals("vendas")){
+                VendaDAO vnDAO = new VendaDAO();
+                List<Compras> compras = null;
+                if(jRadioBtnNmCliente.isSelected()){
+                    compras = vnDAO.pesquisaCompras(1, jTextNomePesquisa.getText());
+                    if(compras.size()== 0){
+                        JOptionPane.showMessageDialog(this, "Nenhuma Informação Foi Encontrada, Tente Novamente!", "Alerta!", 1);
+                    }
                
-            }else if(jRadioBtnComprasPendentes.isSelected()){
-                compras = vnDAO.pesquisaCompras(2, jTextNomePesquisa.getText());
+                }else if(jRadioBtnComprasPendentes.isSelected()){
+                    compras = vnDAO.pesquisaPendente();
+                    if(compras.size()== 0){
+                        JOptionPane.showMessageDialog(this, "Nenhuma Informação Foi Encontrada, Tente Novamente!", "Alerta!", 1);
+                    }
                               
+                }else{
+                    String dtCompra = jFormattedTxtDt.getText();
+                    String data = dtCompra.replace(" ", "");
+                    compras = vnDAO.pesquisaCompras(3, data);
+                    if(compras.size()== 0){
+                        JOptionPane.showMessageDialog(this, "Nenhuma Informação Foi Encontrada, Tente Novamente!", "Alerta!", 1);
+                    }
+                }
+                DefaultTableModel valor = (DefaultTableModel) jTableRelatorioVendas.getModel();
+                valor.getDataVector().removeAllElements();
+            
+                int i = 0;
+                while(compras.size()>i){
+                    valor.addRow(new Object[]{compras.get(i).getNome_cliente(), compras.get(i).getTelefone_cliente(), compras.get(i).getDt_venda(), compras.get(i).getValor_venda(), compras.get(i).getDescricao(), compras.get(i).getSituacao(), compras.get(i).getNm_vendedor()});
+                    i++;
+                }
             }else{
-                String dtCompra = setDt(jFormattedTxtDt.getText());
-                compras = vnDAO.pesquisaCompras(3, dtCompra);
-            }
-            DefaultTableModel valor = (DefaultTableModel) jTableRelatorioVendas.getModel();
-            valor.getDataVector().removeAllElements();
+                PagamentosDAO pgDAO = new PagamentosDAO();
+                List<Pagamentos> pagamentos = null;
+                if(jRadioBtnNmCliente.isSelected()){
+                    pagamentos = pgDAO.pesquisarPagamentos(1, jTextNomePesquisa.getText());
+                    if(pagamentos.size()== 0){
+                        JOptionPane.showMessageDialog(this, "Nenhuma Informação Foi Encontrada, Tente Novamente!", "Alerta!", 1);
+                    }
+
+                }else{
+                    String dt_Compra = jFormattedTxtDt.getText();
+                    String dt = dt_Compra.replace(" ", "");
+                    pagamentos = pgDAO.pesquisarPagamentos(2, dt);
+                    if(pagamentos.size()== 0){
+                        JOptionPane.showMessageDialog(this, "Nenhuma Informação Foi Encontrada, Tente Novamente!", "Alerta!", 1);
+                    }
+                }
+                DefaultTableModel valores = (DefaultTableModel) jTableRelatorioPagamento.getModel();
+                
+                valores.getDataVector().removeAllElements();
             
-            int i = 0;
-            while(compras.size()>i){
-                valor.addRow(new Object[]{compras.get(i).getNome_cliente(), compras.get(i).getTelefone_cliente(), compras.get(i).getDt_venda(), compras.get(i).getValor_venda(), compras.get(i).getDescricao(), compras.get(i).getSituacao(), compras.get(i).getNm_vendedor()});
-                i++;
+                int a = 0;
+                while(pagamentos.size()>a){
+                    valores.addRow(new Object[]{pagamentos.get(a).getNome_cliente(), pagamentos.get(a).getTelefone_cliente(), pagamentos.get(a).getDt_compra(), pagamentos.get(a).getValor_compra(), pagamentos.get(a).getDescricao(), pagamentos.get(a).getValor_pago(), pagamentos.get(a).getTipo_venda(), pagamentos.get(a).getDt_pagamento(), pagamentos.get(a).getNm_vendedor()});
+                    a++;
+                }
             }
-        }
-            
         }
     }//GEN-LAST:event_jTextNomePesquisaKeyPressed
 
     private void jFormattedTxtDtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTxtDtKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            if(jLabelTituloRelatorio.getText().equals("vendas")){
-            VendaDAO vnDAO = new VendaDAO();
-            List<Compras> compras = null;
-            if(jRadioBtnNmCliente.isSelected()){
-                compras = vnDAO.pesquisaCompras(1, jTextNomePesquisa.getText());
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){    
+            String tabela = jLabelTituloRelatorio.getText();
+            if(tabela.equals("vendas")){
+                VendaDAO vnDAO = new VendaDAO();
+                List<Compras> compras = null;
+                if(jRadioBtnNmCliente.isSelected()){
+                    compras = vnDAO.pesquisaCompras(1, jTextNomePesquisa.getText());
+                    if(compras.size()== 0){
+                        JOptionPane.showMessageDialog(this, "Nenhuma Informação Foi Encontrada, Tente Novamente!", "Alerta!", 1);
+                    }
                
-            }else if(jRadioBtnComprasPendentes.isSelected()){
-                compras = vnDAO.pesquisaCompras(2, jTextNomePesquisa.getText());
+                }else if(jRadioBtnComprasPendentes.isSelected()){
+                    compras = vnDAO.pesquisaPendente();
+                    if(compras.size()== 0){
+                        JOptionPane.showMessageDialog(this, "Nenhuma Informação Foi Encontrada, Tente Novamente!", "Alerta!", 1);
+                    }
                               
-            }else{
-                String dtCompra = setDt(jFormattedTxtDt.getText());
-                compras = vnDAO.pesquisaCompras(3, dtCompra);
-            }
-            DefaultTableModel valor = (DefaultTableModel) jTableRelatorioVendas.getModel();
-            valor.getDataVector().removeAllElements();
+                }else{
+                    String dtCompra = jFormattedTxtDt.getText();
+                    String data = dtCompra.replace(" ", "");
+                    compras = vnDAO.pesquisaCompras(3, data);
+                    if(compras.size()== 0){
+                        JOptionPane.showMessageDialog(this, "Nenhuma Informação Foi Encontrada, Tente Novamente!", "Alerta!", 1);
+                    }
+                }
+                DefaultTableModel valor = (DefaultTableModel) jTableRelatorioVendas.getModel();
+                valor.getDataVector().removeAllElements();
             
-            int i = 0;
-            while(compras.size()>i){
-                valor.addRow(new Object[]{compras.get(i).getNome_cliente(), compras.get(i).getTelefone_cliente(), compras.get(i).getDt_venda(), compras.get(i).getValor_venda(), compras.get(i).getDescricao(), compras.get(i).getSituacao(), compras.get(i).getNm_vendedor()});
-                i++;
+                int i = 0;
+                while(compras.size()>i){
+                    valor.addRow(new Object[]{compras.get(i).getNome_cliente(), compras.get(i).getTelefone_cliente(), compras.get(i).getDt_venda(), compras.get(i).getValor_venda(), compras.get(i).getDescricao(), compras.get(i).getSituacao(), compras.get(i).getNm_vendedor()});
+                    i++;
+                }
+            }else{
+                PagamentosDAO pgDAO = new PagamentosDAO();
+                List<Pagamentos> pagamentos = null;
+                if(jRadioBtnNmCliente.isSelected()){
+                    pagamentos = pgDAO.pesquisarPagamentos(1, jTextNomePesquisa.getText());
+                    if(pagamentos.size()== 0){
+                        JOptionPane.showMessageDialog(this, "Nenhuma Informação Foi Encontrada, Tente Novamente!", "Alerta!", 1);
+                    }
+
+                }else{
+                    String dt_Compra = jFormattedTxtDt.getText();
+                    String dt = dt_Compra.replace(" ", "");
+                    pagamentos = pgDAO.pesquisarPagamentos(2, dt);
+                    if(pagamentos.size()== 0){
+                        JOptionPane.showMessageDialog(this, "Nenhuma Informação Foi Encontrada, Tente Novamente!", "Alerta!", 1);
+                    }
+                }
+                DefaultTableModel valores = (DefaultTableModel) jTableRelatorioPagamento.getModel();
+                
+                valores.getDataVector().removeAllElements();
+            
+                int a = 0;
+                while(pagamentos.size()>a){
+                    valores.addRow(new Object[]{pagamentos.get(a).getNome_cliente(), pagamentos.get(a).getTelefone_cliente(), pagamentos.get(a).getDt_compra(), pagamentos.get(a).getValor_compra(), pagamentos.get(a).getDescricao(), pagamentos.get(a).getValor_pago(), pagamentos.get(a).getTipo_venda(), pagamentos.get(a).getDt_pagamento(), pagamentos.get(a).getNm_vendedor()});
+                    a++;
+                }
             }
-        }
         }
     }//GEN-LAST:event_jFormattedTxtDtKeyPressed
 
@@ -5361,7 +5455,10 @@ public class AreaUsuario extends javax.swing.JFrame {
             ClienteDAO clDAO = new ClienteDAO();
             List<Clientes> clientes = null;
             clientes = clDAO.pesquisaCliente(jTxtFiltro.getText());
-        
+            if(clientes.size()== 0){
+                    JOptionPane.showMessageDialog(this, "Nenhuma Informação Foi Encontrada, Tente Novamente!", "Alerta!", 1);
+                }
+            
             DefaultTableModel valor = (DefaultTableModel) jTableClientes.getModel();
             valor.getDataVector().removeAllElements();
         

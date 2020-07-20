@@ -24,6 +24,17 @@ public class ClienteDAO {
         this.conecta = new DAO().conecta();
     }
     
+    public void finalize() throws Throwable{
+        try{
+            conecta.close();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            
+        }
+        super.finalize();
+    }
+    
     public void salvar(Clientes cliente){
         
         String sql = "INSERT INTO tb_clientes(nm_cliente, telefone_cliente, endereco_cliente, situacao_cliente, nm_vendedor, valor_limite)"
@@ -39,7 +50,6 @@ public class ClienteDAO {
             
             stmt.execute();
             stmt.close();
-            
             
         }
         catch(SQLException e){
@@ -224,7 +234,6 @@ public class ClienteDAO {
             }
             rs.close();
             stmt.close();
-            
         }
         catch(SQLException e){
             System.out.println(e);
@@ -245,14 +254,10 @@ public class ClienteDAO {
             
             stmt.execute();
             stmt.close();
-            
-            
         }
         catch(SQLException e){
             throw new RuntimeException(e);
         }
-        
-        
     }
     
     public void setStatus(Clientes cliente){
@@ -268,7 +273,6 @@ public class ClienteDAO {
             
             stmt.execute();
             stmt.close();
-            
         }
         catch(SQLException e){
             throw new RuntimeException(e);

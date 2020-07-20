@@ -280,7 +280,6 @@ public class Login extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(this, "Usuarios/e ou senha estão incorretos!", "Atenção",1);
         }
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPassLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPassLoginMousePressed

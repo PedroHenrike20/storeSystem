@@ -21,6 +21,17 @@ public class UsuarioDAO {
         this.conecta = new DAO().conecta();
     }
     
+    public void finalize() throws Throwable{
+        try{
+            conecta.close();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        super.finalize();
+    }
+    
+    
     //SALVANDO USUARIOS
     public void salvarUsuarios(Vendedor vendedor, String opc){
         
@@ -48,7 +59,6 @@ public class UsuarioDAO {
             
             stmt.execute();
             stmt.close();
-    
         }
         catch(SQLException e){
             throw new RuntimeException(e);
@@ -73,7 +83,6 @@ public class UsuarioDAO {
             
             stmt.execute();
             stmt.close();
-            
         }
         catch(SQLException e){
             throw new RuntimeException(e);
@@ -92,7 +101,6 @@ public class UsuarioDAO {
             
             stmt.execute();
             stmt.close();
-            
             
         }
         catch(SQLException e){
@@ -114,7 +122,6 @@ public class UsuarioDAO {
             
             stmt.execute();
             stmt.close();
-            
         }
         catch(SQLException e){
             throw new RuntimeException(e);
@@ -128,9 +135,9 @@ public class UsuarioDAO {
             PreparedStatement stmt = conecta.prepareStatement(sql);
             
             stmt.setString(1, vendedor.getNome());
-            
             stmt.execute();
             stmt.close();
+            
         }catch(SQLException e){
             throw new RuntimeException(e);
         }
@@ -155,7 +162,6 @@ public class UsuarioDAO {
                usuario = rs.getString("nm_usuario");
                senha = rs.getString("senha_usuario");
                situaçao = rs.getString("situaçao_vendedor");
-               //autenticacao = true;
            }else{
                stmt.close();
                return autenticacao;
@@ -202,9 +208,7 @@ public class UsuarioDAO {
                 
             }else{
                 stmt.close();
-            }
-            
-            
+            }           
         }
         catch(SQLException e){
             JOptionPane.showMessageDialog(null, e);
@@ -327,58 +331,13 @@ public class UsuarioDAO {
              }
              rs.close();
              stmt.close();
-             
              return vendedor;
-             
-             
-             
          }
          catch(SQLException e){
              System.out.println(e);
-             
          }
          return vendedor;
-         
      }
-     /*
-     public List<Vendedor>  getSenha(String nome){
-         
-         String sql = "SELECT senha_usuaio FROM tb_vendedor WHERE nm_vendedor = ?";
-         ResultSet rs;
-         List<Vendedor> vendedor = new ArrayList<Vendedor>();
-         
-         try{
-             PreparedStatement stmt = conecta.prepareStatement(sql);
-             stmt.setString(1, nome);
-             
-             rs = stmt.executeQuery();
-             
-             while(rs.next()){
-                 Vendedor vendedores = new Vendedor();
-                 vendedores.setSenha(rs.getString("senha_usuario"));
-                 
-                 vendedor.add(vendedores);
-             }
-             rs.close();
-             stmt.close();
-             
-             return vendedor;
-             
-         }
-         catch(SQLException e){
-             System.out.println(e);
-             
-         }
-         return vendedor;
-         
-         
-         
-         
-     }
-     
-     
-       */ 
-        
  }
     
     

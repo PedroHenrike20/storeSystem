@@ -23,9 +23,15 @@ public class PagamentosDAO {
     public PagamentosDAO(){
         this.conecta = new DAO().conecta();
     }
-    
-    
-    
+    public void finalize() throws Throwable{
+        try{
+            conecta.close();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        super.finalize();
+    }
     
     public void salvarPagamentos(Pagamentos pagamento){
         String sql = "INSERT INTO tb_pagamentos(dt_pagamentos, valor_pago, id_vendas, nm_cliente, telefone_cliente, nm_vendedor, tipo_pagamento, descricao, dt_compra, valor_compra) "

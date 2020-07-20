@@ -19,12 +19,19 @@ import sistemaloja.Compras;
  */
 public class VendaDAO {
     private Connection conecta;
-    
     public VendaDAO(){
         this.conecta = new DAO().conecta();    
     }
     
-    
+    public void finalize() throws Throwable{
+        try{
+            conecta.close();
+        }
+        catch(SQLException e){
+            e.printStackTrace();            
+        }
+        super.finalize();
+    }
     
     public void addVendas(Compras compra){
         
@@ -65,8 +72,7 @@ public class VendaDAO {
             stmt.setString(5, compra.getTelefone_cliente());
             
             stmt.execute();
-            stmt.close();
-            
+            stmt.close();            
         }
         catch(SQLException e){
             throw new RuntimeException(e);
@@ -103,8 +109,7 @@ public class VendaDAO {
                 
             }
             rs.close();
-            stmt.close();
-            
+            stmt.close();            
         }
         catch(SQLException e){
             System.out.println(e);
@@ -124,8 +129,7 @@ public class VendaDAO {
             stmt.setInt(2, compra.getId_venda());
             
             stmt.execute();
-            stmt.close();
-            
+            stmt.close();            
         }
         catch(SQLException e){
             throw new RuntimeException(e);
@@ -176,9 +180,7 @@ public class VendaDAO {
             }
             rs.close();
             stmt.close();
-            return compras;
-            
-            
+            return compras;            
         }
         catch(SQLException e){
             JOptionPane.showMessageDialog(null, e);
@@ -218,8 +220,7 @@ public class VendaDAO {
                 compras.add(compra);
             }
             rs.close();
-            stmt.close();
-            
+            stmt.close();            
         }
         catch(SQLException e){
             System.out.println(e);
@@ -253,9 +254,9 @@ public class VendaDAO {
                 
                 compras.add(compra);
             }
+            
             rs.close();
             stmt.close();
-            
         }
         catch(SQLException e){
             System.out.println(e);

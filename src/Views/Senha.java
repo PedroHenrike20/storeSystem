@@ -7,6 +7,8 @@ package Views;
 
 import DAO.*;
 import com.sun.glass.events.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import sistemaloja.Clientes;
 import sistemaloja.Compras;
@@ -20,6 +22,13 @@ import sistemaloja.Vendedor;
 public class Senha extends javax.swing.JFrame {
     
     //AreaUsuario au = new AreaUsuario();
+    Vendedor vendedor = new Vendedor();
+    ClienteDAO clDAO = new ClienteDAO();
+    Clientes cliente = new Clientes();
+    Compras compra = new Compras();
+    VendaDAO vnDAO = new VendaDAO();
+    Pagamentos pagamento = new Pagamentos();
+    PagamentosDAO pgDAO = new PagamentosDAO();
 
     
 
@@ -362,17 +371,11 @@ public class Senha extends javax.swing.JFrame {
     private void jBtnFinalizarAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFinalizarAcaoActionPerformed
         // TODO add your handling code here:
        // vendedor.setNome(jLabelNomeSenha.getText());
+      
         UsuarioDAO usDAO = new UsuarioDAO();
         char[] pass = jPassFinalCadFun.getPassword();
         String senha = String.valueOf(pass);
         if(usDAO.validarLogin(nm_user, senha )== true){
-            Vendedor vendedor = new Vendedor();
-            ClienteDAO clDAO = new ClienteDAO();
-            Clientes cliente = new Clientes();
-            Compras compra = new Compras();
-            VendaDAO vnDAO = new VendaDAO();
-            Pagamentos pagamento = new Pagamentos();
-            PagamentosDAO pgDAO = new PagamentosDAO();
             switch(opc){
                 
                 case "01":
@@ -382,6 +385,13 @@ public class Senha extends javax.swing.JFrame {
                     vendedor.setSenha(senha_usuario);
                     usDAO.salvarUsuarios(vendedor, "01");
                     JOptionPane.showMessageDialog(this, "Usuário Cadastrado Com Sucesso!", "Atenção!",1);
+                    {
+                        try {
+                            usDAO.finalize();
+                        } catch (Throwable ex) {
+                            Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                     limparVariaveis();
                     this.dispose();
                     break;
@@ -396,7 +406,13 @@ public class Senha extends javax.swing.JFrame {
                 
                     clDAO.salvar(cliente);
                     JOptionPane.showMessageDialog(this, "Cliente Cadastrado Com Sucesso!", "Atenção!",1);
-     
+                    {
+                        try {
+                            clDAO.finalize();
+                        } catch (Throwable ex) {
+                            Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                     limparVariaveis();
                     this.dispose();
                     break;
@@ -406,8 +422,14 @@ public class Senha extends javax.swing.JFrame {
                     vendedor.setNome(nome_geral);
                     vendedor.setCargo(cargo_usuario);
                     usDAO.alteraCargo(vendedor);
-                
                     JOptionPane.showMessageDialog(this, "Cargo Promovido com Sucesso!","Atenção!",1);
+                    {
+                        try {
+                            usDAO.finalize();
+                        } catch (Throwable ex) {
+                            Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                     limparVariaveis();
                     this.dispose();
                     break;
@@ -422,6 +444,13 @@ public class Senha extends javax.swing.JFrame {
                     compra.setValor_venda(valor_compra);
                     
                     vnDAO.addVendas(compra);
+                    {
+                        try {
+                            vnDAO.finalize();
+                        } catch (Throwable ex) {
+                            Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                     
                     cliente.setNome(nome_geral);
                     cliente.setTelefone(telefone_cliente);
@@ -429,6 +458,13 @@ public class Senha extends javax.swing.JFrame {
                     
                     clDAO.setLimite(cliente);
                     JOptionPane.showMessageDialog(this, "Compra Adicionada Com Sucesso!","Atenção",1);
+                    {
+                        try {
+                            clDAO.finalize();
+                        } catch (Throwable ex) {
+                            Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                     limparVariaveis();
                     this.dispose();
                     break;
@@ -443,6 +479,13 @@ public class Senha extends javax.swing.JFrame {
                 
                     clDAO.alterarCliente(cliente);
                     JOptionPane.showMessageDialog(this, "Alteração Realizada Com Sucesso!","Atenção!",1);
+                    {
+                        try {
+                            clDAO.finalize();
+                        } catch (Throwable ex) {
+                            Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                     limparVariaveis();
                     this.dispose();
                     break;
@@ -461,6 +504,13 @@ public class Senha extends javax.swing.JFrame {
                     pagamento.setValor_compra(valor_compra);
                 
                     pgDAO.salvarPagamentos(pagamento);
+                    {
+                        try {
+                            pgDAO.finalize();
+                        } catch (Throwable ex) {
+                            Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                 
                
                     cliente.setLimite(limite_cliente);
@@ -468,11 +518,25 @@ public class Senha extends javax.swing.JFrame {
                     cliente.setTelefone(telefone_cliente);
                 
                     clDAO.setLimite(cliente);
+                    {
+                        try {
+                            clDAO.finalize();
+                        } catch (Throwable ex) {
+                            Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                 
                 
                     compra.setId_venda(idCompra);
                     compra.setSituacao("PAGO");
                     vnDAO.resolveCompras(compra);
+                    {
+                        try {
+                            vnDAO.finalize();
+                        } catch (Throwable ex) {
+                            Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                 
                     JOptionPane.showMessageDialog(this, "Compra Recebida Com Sucesso!", "Atenção!",1);
                     limparVariaveis();
@@ -489,6 +553,13 @@ public class Senha extends javax.swing.JFrame {
                     clDAO.setStatus(cliente);
        
                     JOptionPane.showMessageDialog(this, "Cliente Indisponível Temporariamente!","Atenção!",1);
+                    {
+                        try {
+                            clDAO.finalize();
+                        } catch (Throwable ex) {
+                            Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                     limparVariaveis();
                     this.dispose();
                     break;
@@ -501,6 +572,13 @@ public class Senha extends javax.swing.JFrame {
                 
                     clDAO.setStatus(cliente);
                     JOptionPane.showMessageDialog(this, "Cliente Disponível Para Novas Compras!","Atenção!",1);
+                    {
+                        try {
+                            clDAO.finalize();
+                        } catch (Throwable ex) {
+                            Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }   
                     limparVariaveis();
                     this.dispose();
                     break;
@@ -520,7 +598,13 @@ public class Senha extends javax.swing.JFrame {
                 
          
                     pgDAO.salvarPagamentos(pagamento);
-                
+                    {
+                        try {
+                            pgDAO.finalize();
+                        } catch (Throwable ex) {
+                            Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
           
                     cliente.setLimite(limite_cliente);
                     cliente.setNome(nome_geral);
@@ -528,13 +612,26 @@ public class Senha extends javax.swing.JFrame {
                 
            
                     clDAO.setLimite(cliente);
-                
+                    {
+                        try {
+                            clDAO.finalize();
+                        } catch (Throwable ex) {
+                            Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                     compra.setSituacao("PENDENTE");
                     compra.setValor_venda(valor_restanteCompra);
                     compra.setId_venda(idCompra);
           
                     vnDAO.resolveAcordoCompras(compra);
-                
+                    {
+                        try {
+                            vnDAO.finalize();
+                        } catch (Throwable ex) {
+                            Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    
                     JOptionPane.showMessageDialog(this, "Acordo Realizado Com Sucesso!", "Alerta!",1);
                     limparVariaveis();
                     this.dispose();
@@ -547,16 +644,23 @@ public class Senha extends javax.swing.JFrame {
                 
                     usDAO.alterarUsuario(vendedor);
                     JOptionPane.showMessageDialog(this, "Os Dados Foram Atualizados Com Sucesso!","Alerta!",1);
+                    {
+                        try {
+                            usDAO.finalize();
+                        } catch (Throwable ex) {
+                            Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                     limparVariaveis();
                     this.dispose();
-                    break;                  
+                    break;                                    
                 
             }
             
         }else{
             JOptionPane.showMessageDialog(this, "Senha Incorreta, tente novamente!", "Alerta!",1);
         }
-            
+      
     }//GEN-LAST:event_jBtnFinalizarAcaoActionPerformed
 
     private void jBtnCancelarPassCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarPassCadActionPerformed
@@ -566,23 +670,13 @@ public class Senha extends javax.swing.JFrame {
 
     private void jPassFinalCadFunKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPassFinalCadFunKeyPressed
         // TODO add your handling code here:
+      
         UsuarioDAO usDAO = new UsuarioDAO();
         char[] pass = jPassFinalCadFun.getPassword();
         String senha = String.valueOf(pass);
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             if(usDAO.validarLogin(nm_user, senha )== true){
-                
-                
-                Vendedor vendedor = new Vendedor();
-                ClienteDAO clDAO = new ClienteDAO();
-                Clientes cliente = new Clientes();
-                Compras compra = new Compras();
-                VendaDAO vnDAO = new VendaDAO();
-                Pagamentos pagamento = new Pagamentos();
-                PagamentosDAO pgDAO = new PagamentosDAO();
                 switch(opc){
-                    
-                
                     case "01":
                     
                         vendedor.setNome(nome_geral);
@@ -590,6 +684,13 @@ public class Senha extends javax.swing.JFrame {
                         vendedor.setSenha(senha_usuario);
                         usDAO.salvarUsuarios(vendedor, "01");
                         JOptionPane.showMessageDialog(this, "Usuário Cadastrado Com Sucesso!", "Atenção!",1);
+                        {
+                            try {
+                                usDAO.finalize();
+                            } catch (Throwable ex) {
+                                Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                         limparVariaveis();
                         this.dispose();
                         break;
@@ -604,6 +705,13 @@ public class Senha extends javax.swing.JFrame {
                 
                         clDAO.salvar(cliente);
                         JOptionPane.showMessageDialog(this, "Cliente Cadastrado Com Sucesso!", "Atenção!",1);
+                        {
+                            try {
+                                clDAO.finalize();
+                            } catch (Throwable ex) {
+                                Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
      
                         limparVariaveis();
                         this.dispose();
@@ -616,6 +724,13 @@ public class Senha extends javax.swing.JFrame {
                         usDAO.alteraCargo(vendedor);
                 
                         JOptionPane.showMessageDialog(this, "Cargo Promovido com Sucesso!","Atenção!",1);
+                        {
+                            try {
+                                usDAO.finalize();
+                            } catch (Throwable ex) {
+                                Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                         limparVariaveis();
                         this.dispose();
                         break;
@@ -630,6 +745,13 @@ public class Senha extends javax.swing.JFrame {
                         compra.setValor_venda(valor_compra);
                     
                         vnDAO.addVendas(compra);
+                        {
+                            try {
+                                vnDAO.finalize();
+                            } catch (Throwable ex) {
+                                Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                     
                         cliente.setNome(nome_geral);
                         cliente.setTelefone(telefone_cliente);
@@ -637,6 +759,13 @@ public class Senha extends javax.swing.JFrame {
                     
                         clDAO.setLimite(cliente);
                         JOptionPane.showMessageDialog(this, "Compra Adicionada Com Sucesso!","Atenção",1);
+                        {
+                            try {
+                                clDAO.finalize();
+                            } catch (Throwable ex) {
+                                Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                         limparVariaveis();
                         this.dispose();
                         break;
@@ -651,6 +780,13 @@ public class Senha extends javax.swing.JFrame {
                 
                         clDAO.alterarCliente(cliente);
                         JOptionPane.showMessageDialog(this, "Alteração Realizada Com Sucesso!","Atenção!",1);
+                        {
+                            try {
+                                clDAO.finalize();
+                            } catch (Throwable ex) {
+                                Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }   
                         limparVariaveis();
                         this.dispose();
                         break;
@@ -669,19 +805,37 @@ public class Senha extends javax.swing.JFrame {
                         pagamento.setValor_compra(valor_compra);
                 
                         pgDAO.salvarPagamentos(pagamento);
-                
+                        {
+                            try {
+                                pgDAO.finalize();
+                            } catch (Throwable ex) {
+                                Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                
                         cliente.setLimite(limite_cliente);
                         cliente.setNome(nome_geral);
                         cliente.setTelefone(telefone_cliente);
                 
                         clDAO.setLimite(cliente);
-                
+                        {
+                            try {
+                                clDAO.finalize();
+                            } catch (Throwable ex) {
+                                Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                 
                         compra.setId_venda(idCompra);
                         compra.setSituacao("PAGO");
                         vnDAO.resolveCompras(compra);
-                
+                        {
+                            try {
+                                vnDAO.finalize();
+                            } catch (Throwable ex) {
+                                Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                         JOptionPane.showMessageDialog(this, "Compra Recebida Com Sucesso!", "Atenção!",1);
                         limparVariaveis();
                         this.dispose();
@@ -697,6 +851,13 @@ public class Senha extends javax.swing.JFrame {
                         clDAO.setStatus(cliente);
        
                         JOptionPane.showMessageDialog(this, "Cliente Indisponível Temporariamente!","Atenção!",1);
+                        {
+                            try {
+                                clDAO.finalize();
+                            } catch (Throwable ex) {
+                                Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                         limparVariaveis();
                         this.dispose();
                         break;
@@ -710,6 +871,13 @@ public class Senha extends javax.swing.JFrame {
                 
                         clDAO.setStatus(cliente);
                         JOptionPane.showMessageDialog(this, "Cliente Disponível Para Novas Compras!","Atenção!",1);
+                        {
+                            try {
+                                clDAO.finalize();
+                            } catch (Throwable ex) {
+                                Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                         limparVariaveis();
                         this.dispose();
                         break;
@@ -729,21 +897,38 @@ public class Senha extends javax.swing.JFrame {
                 
          
                         pgDAO.salvarPagamentos(pagamento);
-                
-          
+                        {
+                            try {
+                                pgDAO.finalize();
+                            } catch (Throwable ex) {
+                                Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                         cliente.setLimite(limite_cliente);
                         cliente.setNome(nome_geral);
                         cliente.setTelefone(telefone_cliente);
-                
-           
                         clDAO.setLimite(cliente);
-                
+                        {
+                            try {
+                                clDAO.finalize();
+                            } catch (Throwable ex) {
+                                Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        
                         compra.setSituacao("PENDENTE");
                         compra.setValor_venda(valor_restanteCompra);
                         compra.setId_venda(idCompra);
           
                         vnDAO.resolveAcordoCompras(compra);
-                
+                        {
+                            try {
+                                vnDAO.finalize();
+                            } catch (Throwable ex) {
+                                Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        
                         JOptionPane.showMessageDialog(this, "Acordo Realizado Com Sucesso!", "Alerta!",1);
                         limparVariaveis();
                         this.dispose();
@@ -756,17 +941,22 @@ public class Senha extends javax.swing.JFrame {
                 
                         usDAO.alterarUsuario(vendedor);
                         JOptionPane.showMessageDialog(this, "Os Dados Foram Atualizados Com Sucesso!","Alerta!",1);
+                        {
+                            try {
+                                usDAO.finalize();
+                            } catch (Throwable ex) {
+                                Logger.getLogger(Senha.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                         limparVariaveis();
                         this.dispose();
-                        break;                  
-                
+                        break;
                 }
-             
-            
             }else{               
                  JOptionPane.showMessageDialog(this, "Senha Incorreta, tente novamente!", "Alerta!",1);
             }
-        }       
+        }
+       
     }//GEN-LAST:event_jPassFinalCadFunKeyPressed
 
     int mx;
