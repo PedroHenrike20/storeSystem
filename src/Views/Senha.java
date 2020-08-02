@@ -666,6 +666,7 @@ public class Senha extends javax.swing.JFrame {
     private void jBtnCancelarPassCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarPassCadActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        limparVariaveis();
     }//GEN-LAST:event_jBtnCancelarPassCadActionPerformed
 
     private void jPassFinalCadFunKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPassFinalCadFunKeyPressed

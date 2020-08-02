@@ -16,8 +16,11 @@ import java.awt.Component;
 import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -258,6 +261,24 @@ public class AreaUsuario extends javax.swing.JFrame {
         
         
         
+        
+    }
+    public String setData(int opc){
+        Date data = new Date();
+        Locale local = new Locale("pt","BR");
+        String dt = "";
+        
+        if(opc == 1){
+            SimpleDateFormat sdf = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy", local);
+            dt = sdf.format(data);
+            //jLabelDt.setText("Barrinha, "+sdf.format(data)+", São Paulo.");
+        }else{
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("      dd  /   MM   /  yyyy");
+            dt = sdf.format(data);
+        
+        }
+        return dt;
     }
     
     public void setCamposValor(){
@@ -285,6 +306,7 @@ public class AreaUsuario extends javax.swing.JFrame {
     
     
     public void bemVindo(){
+        jLabelDt.setText("Barrinha, "+setData(1)+", São Paulo.");
         jLabelNomeUsuario.setText(sessao.getNome());
         jLabelCargoUsuario.setText(sessao.getCargo());
         jLabelNomePerfil.setText(sessao.getNome());
@@ -342,6 +364,7 @@ public class AreaUsuario extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabelCargoUsuario = new javax.swing.JLabel();
+        jLabelDt = new javax.swing.JLabel();
         jPanelCadastro = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -913,12 +936,20 @@ public class AreaUsuario extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabelDt.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabelDt.setText("jLabel65");
+
         javax.swing.GroupLayout jPanelHomeLayout = new javax.swing.GroupLayout(jPanelHome);
         jPanelHome.setLayout(jPanelHomeLayout);
         jPanelHomeLayout.setHorizontalGroup(
             jPanelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelHomeLayout.createSequentialGroup()
                 .addGroup(jPanelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelHomeLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelNomeUsuario))
                     .addGroup(jPanelHomeLayout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addGroup(jPanelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -927,12 +958,9 @@ public class AreaUsuario extends javax.swing.JFrame {
                             .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanelHomeLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelNomeUsuario))
-                    .addGroup(jPanelHomeLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelDt, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
         jPanelHomeLayout.setVerticalGroup(
@@ -944,12 +972,14 @@ public class AreaUsuario extends javax.swing.JFrame {
                     .addComponent(jLabelNomeUsuario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel10)
-                .addGap(23, 23, 23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelDt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(jLabel11)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52))
         );
 
@@ -2805,7 +2835,7 @@ public class AreaUsuario extends javax.swing.JFrame {
         jLabel56.setText("Data da Venda");
 
         try {
-            jFormattedTxtDataCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##  /  ##  /  ####")));
+            jFormattedTxtDataCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("      ##  /   ##   /  ####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -4530,6 +4560,8 @@ public class AreaUsuario extends javax.swing.JFrame {
             if(situaçao.equals("Ativo")){
                 jLabel72.setText(primeiroNome(jLabelNomeDetalhes.getText())[0]);
                 jLabelNomeVendedor.setText(jLabelNomePerfil.getText());
+                jFormattedTxtDataCompra.setText(setData(2));
+                jFormattedTxtDataCompra.setEditable(false);
                 CardLayout cl = (CardLayout) jPanel2.getLayout();
                 cl.show(jPanel2, "TelaAdd");
             }else{
@@ -4551,6 +4583,11 @@ public class AreaUsuario extends javax.swing.JFrame {
         jTextPanelDescriçaoCompra.setText("");
         jTableClientes.clearSelection();
         listarTabelaCompra(jLabelNomeDetalhes.getText(), jLabelTelefoneDetalhesCliente.getText());
+        ClienteDAO clDAO = new ClienteDAO();
+        List<Clientes> cliente = null;
+        cliente = clDAO.getLimite(jLabelNomeDetalhes.getText(), jLabelTelefoneDetalhesCliente.getText());
+        int i = 0;
+        jLabelLimiteDisponivelDetalhesClientes.setText(String.valueOf(cliente.get(i).getLimite()));
         jLabelValorTotal.setText(somaTable());
         jTableComprasCliente.clearSelection();
        
@@ -4558,17 +4595,23 @@ public class AreaUsuario extends javax.swing.JFrame {
 
     private void jBtnAdicionarComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarComprasActionPerformed
         // TODO add your handling code here:
+        double valorCompra = 0;
+        double valor_limite = 0;
+        double nvLimite = 0;
+        double limiteAtual = 0;
+        
+        
         if(jFormattedTxtDataCompra.getText().equals("") || jFormattedTxtValorCompra.getText().equals(null) || jTextPanelDescriçaoCompra.getText().equals("")){
             
             JOptionPane.showMessageDialog(this, "Preencha os campos acima antes de prosseguir!","Alerta!",1);
             
         }else{
-            double valorCompra = setValorDouble(jFormattedTxtValorCompra.getText());  // ALTERAÇÃO FULL
-            double valor_limite = Double.parseDouble(jLabelLimiteDisponivelDetalhesClientes.getText());
-            double nvLimite = valor_limite - valorCompra;
+            valorCompra = setValorDouble(jFormattedTxtValorCompra.getText());  // ALTERAÇÃO FULL
+            valor_limite = Double.parseDouble(jLabelLimiteDisponivelDetalhesClientes.getText());
+            nvLimite = valor_limite - valorCompra;
             
             String nv_limite = arredondaValores(nvLimite);  // ALTERAÇÃO FULL
-            double limiteAtual = setValorDouble(nv_limite);
+            limiteAtual = setValorDouble(nv_limite);
          
             
             
@@ -4583,7 +4626,6 @@ public class AreaUsuario extends javax.swing.JFrame {
                 String descrição = jTextPanelDescriçaoCompra.getText();
                 String nome_cliente = jLabelNomeDetalhes.getText();
                 String telefone_cliente = jLabelTelefoneDetalhesCliente.getText();  
-                jLabelLimiteDisponivelDetalhesClientes.setText(String.valueOf(limiteAtual));
                 s.getDadosCompra(nome_cliente, telefone_cliente, dt_compra, valorCompra, descrição, nome_user, limiteAtual);
                 s.show();
                 s.setLocationRelativeTo(null);
@@ -4774,10 +4816,15 @@ public class AreaUsuario extends javax.swing.JFrame {
         jFormattedTxtDtRecibo.setText(null);
         jFormattedTxtValorAReceber.setText("0.00");
         String nome = jTxtNomeDetalhesCompra.getText();
-        jLabelLimiteDisponivelDetalhesClientes.setText(String.valueOf(valorLimite));
         String telefone = jLabelTelefoneDetalhesCliente.getText();
         listarTabelaCompra(nome, telefone);
         jLabelValorTotal.setText(somaTable());
+        ClienteDAO clDAO = new ClienteDAO();
+        List<Clientes> cliente = null;
+        cliente = clDAO.getLimite(nome, telefone);
+        int i = 0;
+        jLabelLimiteDisponivelDetalhesClientes.setText(String.valueOf(cliente.get(i).getLimite()));
+        
         
         
         
@@ -4841,6 +4888,8 @@ public class AreaUsuario extends javax.swing.JFrame {
     private void jRadioAVistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioAVistaActionPerformed
         // TODO add your handling code here:
         if(jRadioAVista.isSelected()){
+            jFormattedTxtDtRecibo.setText(setData(2));
+            jFormattedTxtDtRecibo.setEditable(false);
             jPanelRecebimentoCompra.setVisible(true);
             jPanelBtnReceberTudo.setVisible(true);
             jPanelFazerAcordo.setVisible(false);
@@ -5578,17 +5627,22 @@ public class AreaUsuario extends javax.swing.JFrame {
     private void jTextPanelDescriçaoCompraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPanelDescriçaoCompraKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            double valorCompra = 0;
+            double valor_limite = 0;
+            double nvLimite = 0;
+            double limiteAtual = 0;
+            
             if(jFormattedTxtDataCompra.getText().equals("") || jFormattedTxtValorCompra.getText().equals(null) || jTextPanelDescriçaoCompra.getText().equals("")){
             
                 JOptionPane.showMessageDialog(this, "Preencha os campos acima antes de prosseguir!","Alerta!",1);
             
             }else{
-                double valorCompra = setValorDouble(jFormattedTxtValorCompra.getText());  // ALTERAÇÃO FULL
-                double valor_limite = Double.parseDouble(jLabelLimiteDisponivelDetalhesClientes.getText());
-                double nvLimite = valor_limite - valorCompra;
+                valorCompra = setValorDouble(jFormattedTxtValorCompra.getText());  // ALTERAÇÃO FULL
+                valor_limite = Double.parseDouble(jLabelLimiteDisponivelDetalhesClientes.getText());
+                nvLimite = valor_limite - valorCompra;
             
                 String nv_limite = arredondaValores(nvLimite);  // ALTERAÇÃO FULL
-                double limiteAtual = setValorDouble(nv_limite);
+                limiteAtual = setValorDouble(nv_limite);
          
             
             
@@ -5902,6 +5956,7 @@ public class AreaUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelCargoFuncionario;
     private javax.swing.JLabel jLabelCargoPerfil;
     private javax.swing.JLabel jLabelCargoUsuario;
+    private javax.swing.JLabel jLabelDt;
     private javax.swing.JLabel jLabelEndereçoDetalhesCliente;
     private javax.swing.JLabel jLabelLimiteDisponivelDetalhesClientes;
     private javax.swing.JLabel jLabelNomeCliente;
